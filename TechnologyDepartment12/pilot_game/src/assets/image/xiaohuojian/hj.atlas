@@ -1,0 +1,20 @@
+
+hj.png
+size: 424,170
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hj
+  rotate: true
+  xy: 2, 2
+  size: 166, 324
+  orig: 166, 324
+  offset: 0, 0
+  index: -1
+huo
+  rotate: false
+  xy: 328, 18
+  size: 94, 150
+  orig: 96, 152
+  offset: 1, 1
+  index: -1

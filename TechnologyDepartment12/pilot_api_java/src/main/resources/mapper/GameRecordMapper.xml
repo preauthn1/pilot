@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.politapi.mapper.GameRecordMapper">
+
+    <select id="getGameRecordList" resultType="java.util.LinkedHashMap">
+        SELECT
+            g.id AS `id`,
+            g.created_at AS `createdAt`,
+            g.round_id AS `roundId`,
+            g.game_code AS `gameCode`,
+            g.billing_type AS `billingType`,
+            g.result AS `result`,
+            g.rebate AS `rebate`,
+            g.settlement AS `settlement`,
+            g.operator AS `operator`,
+            IFNULL(c.bets_number, 0) AS `betsNumber`,
+            IFNULL(c.bets_amount, 0) AS `betsAmount`,
+            IFNULL(c.winners, 0) AS `winners`,
+            IFNULL(c.bets_amount - c.total_expenses, 0) AS `winOrLoss`
+        FROM lms_game_record g
+        LEFT JOIN (
+            SELECT
+                round_id,
+                channel_id,
+                game_code,
+                COUNT(DISTINCT user_id) AS bets_number,
+                IFNULL(SUM(bet), 0) AS bets_amount,
+                COUNT(DISTINCT IF(settlement_multiple &gt; 0, user_id, NULL)) AS winners,
+                IFNULL(SUM(IF(settlement_multiple &gt; 0, pay_out, 0)), 0) AS total_expenses
+            FROM lms_coin_record
+            WHERE user_id &gt;= 10000
+            GROUP BY round_id, channel_id, game_code
+        ) c ON g.round_id = c.round_id AND g.channel_id = c.channel_id AND g.game_code &lt;=&gt; c.game_code
+        WHERE 1=1
+        <if test="billingType != null and billingType != ''">
+            AND g.billing_type = #{billingType}
+        </if>
+        <if test="roundId != null and roundId != ''">
+            AND g.round_id = #{roundId}
+        </if>
+        <choose>
+            <when test="gameCode == '__legacy__'">AND g.game_code IS NULL</when>
+            <when test="gameCode != null and gameCode != ''">AND g.game_code = #{gameCode}</when>
+        </choose>
+        <if test="startAt != null and startAt != '' and endAt != null and endAt != ''">
+            AND g.created_at BETWEEN #{startAt} AND #{endAt}
+        </if>
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND g.channel_id IN
+            <foreach collection="allowedChannelIds" item="cid" open="(" separator="," close=")">
+                #{cid}
+            </foreach>
+        </if>
+        ORDER BY g.created_at DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="getGameRecordTotal" resultType="long">
+        SELECT COUNT(1)
+        FROM lms_game_record g
+        WHERE 1=1
+        <if test="billingType != null and billingType != ''">
+            AND g.billing_type = #{billingType}
+        </if>
+        <if test="roundId != null and roundId != ''">
+            AND g.round_id = #{roundId}
+        </if>
+        <choose>
+            <when test="gameCode == '__legacy__'">AND g.game_code IS NULL</when>
+            <when test="gameCode != null and gameCode != ''">AND g.game_code = #{gameCode}</when>
+        </choose>
+        <if test="startAt != null and startAt != '' and endAt != null and endAt != ''">
+            AND g.created_at BETWEEN #{startAt} AND #{endAt}
+        </if>
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND g.channel_id IN
+            <foreach collection="allowedChannelIds" item="cid" open="(" separator="," close=")">
+                #{cid}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="getGlobalSummary" resultType="java.util.LinkedHashMap">
+        SELECT
+            IFNULL(SUM(bet), 0) AS `totalBets`,
+            IFNULL(SUM(IF(settlement_multiple &gt; 0, pay_out, 0)), 0) AS `totalExpenses`
+        FROM lms_coin_record
+        WHERE user_id &gt;= 10000
+        <choose>
+            <when test="gameCode == '__legacy__'">AND game_code IS NULL</when>
+            <when test="gameCode != null and gameCode != ''">AND game_code = #{gameCode}</when>
+        </choose>
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND channel_id IN
+            <foreach collection="allowedChannelIds" item="cid" open="(" separator="," close=")">
+                #{cid}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="getFilteredSummary" resultType="java.util.LinkedHashMap">
+        SELECT
+            IFNULL(SUM(cr.bet), 0) AS `totalBets`,
+            IFNULL(SUM(IF(cr.settlement_multiple &gt; 0, cr.pay_out, 0)), 0) AS `totalExpenses`
+        FROM lms_coin_record cr
+        INNER JOIN lms_game_record g ON g.round_id = cr.round_id AND g.channel_id = cr.channel_id AND g.game_code &lt;=&gt; cr.game_code
+        WHERE cr.user_id &gt;= 10000
+        <if test="billingType != null and billingType != ''">
+            AND g.billing_type = #{billingType}
+        </if>
+        <if test="roundId != null and roundId != ''">
+            AND g.round_id = #{roundId}
+        </if>
+        <choose>
+            <when test="gameCode == '__legacy__'">AND g.game_code IS NULL</when>
+            <when test="gameCode != null and gameCode != ''">AND g.game_code = #{gameCode}</when>
+        </choose>
+        <if test="startAt != null and startAt != '' and endAt != null and endAt != ''">
+            AND g.created_at BETWEEN #{startAt} AND #{endAt}
+        </if>
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND cr.channel_id IN
+            <foreach collection="allowedChannelIds" item="cid" open="(" separator="," close=")">
+                #{cid}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

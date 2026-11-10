@@ -1,0 +1,50 @@
+{
+  "tips": {
+    "login_timeout": "La connexion a expiré, veuillez vous reconnecter",
+    "channel_error": "Le canal n'existe pas",
+    "channel_maintenance": "Maintenance du canal",
+    "get_data_fail": "Échec de la récupération des données",
+    "connect_fail": "La connexion a échoué",
+    "connect_lost": "La connexion réseau est perdue, veuillez vous reconnecter",
+    "bet_fail": "Pari raté, solde insuffisant",
+    "enter_error": "Entrez une erreur de pièce !",
+    "request_fail": "La requête a échoué",
+    "token_error": "jeton invalide"
+  },
+  "btn": {
+    "confirm": "Confirmer",
+    "bet": "MISE",
+    "cancel": "ANNULER",
+    "wait": "En attente du prochain tour",
+    "cash_out": "ENCAISSEMENT"
+  },
+  "game": {
+    "auto_bet": "Pari automatique",
+    "auto_cash_out": "Retrait automatique",
+    "wait": "EN ATTENTE DU PROCHAIN ​​TOUR",
+    "end": "Sauter",
+    "history": "HISTORIQUE ROND",
+    "total_bet": "Montant total des paris",
+    "previous_round": "Tour précédent",
+    "current_round": "Manche en cours",
+    "cash_out": "Encaisser",
+    "cash_out_btn": "Encaisser",
+    "multiple": "Plusieurs.",
+    "multiple_btn": "Plusieurs.",
+    "player": "Joueurs",
+    "date": "Date",
+    "bet": "Miser",
+    "game_rule": "Règles du jeu",
+    "win": "Vous gagnez",
+    "win_multiple": "Votre retrait multiple",
+    "all": "Tous",
+    "mine": "Mien",
+    "rang": "Rang",
+    "countdown_s":"compte à rebours",
+    "start":"Démarrer",
+    "change_lang":"Sélectionnez la langue",
+    "confirm":"Confirmer"
+  },
+  "rule": "<h1>Règles du jeu</h1><p>Rocket Flight est une nouvelle génération de jeux iGame. Vous pouvez doubler vos gains en quelques secondes seulement, Rocket Flight est construit sur un système équitable de résultats vérifiables, véritable gage de crédibilité dans l'industrie du jeu aujourd'hui.</p><h2>Rocket Flight est très simple à jouer :< /h2><p>1. Pariez avant que la fusée porte-bonheur ne décolle. </p><p>2. Au fur et à mesure que la fusée porte-bonheur décolle, les cotes du pari augmentent. </p><p>3. 3. Encaisser : Appuyez sur le bouton d'encaissement pour gagner X fois votre argent avant que la fusée ne disparaisse ! </p>\n<h1>Plus de détails</h1><p>Le multiplicateur commence à 1x et plus le Lucky Rocket décolle longtemps, plus le paiement est élevé. </p><p>Votre profit est calculé comme le multiplicateur au moment où vous arrêtez de voler, multiplié par le montant de votre pari. </p><p>Le temps de vol du Lucky Rocket est généré automatiquement par notre supercalculateur i-Game et ne peut pas être manipulé par des humains. C'est juste et équitable. </p>\n<h1>Caractéristiques du jeu</h1><h2>Parier et encaisser</h2><p>1. Sélectionnez ou remplissez un montant et appuyez sur le bouton « Parier » pour placer votre pari. </p><p>2. Appuyez sur l'icône plus dans le coin supérieur droit du premier tableau de paris et vous pouvez placer deux paris en même temps. </p><p> 3. Appuyez sur le bouton 'Cash Out' pour retirer votre pari. Le montant que vous gagnez dépend du montant de votre pari multiplié par le multiplicateur au moment de l'encaissement. </p><p>4. Si vous n'encaissez pas avant que la fusée ne disparaisse, votre pari est perdu. </p>\n<h2>Auto-Bet et Auto-Cash </h2><p>1. Pari automatique : lorsque cette fonction est activée, le système place automatiquement un pari à chaque fois que la fusée décolle. </p><p> 2. Arrêt automatique du vol : lorsque cette fonctionnalité est activée, vous encaisserez automatiquement lorsque votre pari atteindra le multiplicateur que vous avez renseigné.</p>\n<h2>Résultats et statistiques des paris</ h2><p>1. Sous la page du jeu, il y a un panneau de paris en direct. Ici, vous pouvez voir les paris placés par tous les joueurs dans le tour en cours. </p><p>2. Sur la page ‘Mes paris’, vous pouvez voir tous vos paris et les informations sur les gains/pertes. </p><p>3. Sur la page 'Classements', il y a des statistiques de résultats de jeu. Vous pouvez voir votre historique d'encaissement et le classement des multiplicateurs d'encaissement des autres joueurs. </p>\n<h1 class=\"title\">Autres problèmes</h1><p>1. Si la connexion Internet est interrompue pendant le pari, le jeu sera automatiquement encaissé au multiplicateur actuel et le montant du gain sera ajouté à votre solde. </p><p>2. En cas de défaillance du matériel/logiciel de jeu, les paris et paiements de jeu concernés seront invalidés et tous les paris concernés seront remboursés. </p>"
+
+}

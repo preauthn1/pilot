@@ -1,0 +1,1322 @@
+{
+	"textures": [
+		{
+			"image": "PlaneIdel.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1936,
+				"h": 768
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "PlaneIdel_1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_62.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 122,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 243,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 364,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_5.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 485,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_6.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 606,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_7.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 727,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_8.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 848,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_9.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 969,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_10.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1090,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_11.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1211,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_12.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1332,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_13.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1453,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_14.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1574,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_15.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1695,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_16.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1816,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_17.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_18.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 122,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_19.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 243,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_20.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 364,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_21.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 485,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_22.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 606,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_23.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 727,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_24.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 848,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_25.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 969,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_26.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1090,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_27.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1211,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_28.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1332,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_29.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1453,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_30.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1574,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_31.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1695,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_32.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1816,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_33.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_34.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 122,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_35.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 243,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_36.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 364,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_37.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 485,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_38.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 606,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_39.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 727,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_40.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 848,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_41.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 969,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_42.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1090,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_43.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1211,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_44.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1332,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_45.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1453,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_46.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1574,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_47.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1695,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_48.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1816,
+						"y": 385,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_49.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_50.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 122,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_51.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 243,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_52.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 364,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_53.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 485,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_54.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 606,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_55.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 727,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_56.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 848,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_57.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 969,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_58.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1090,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_59.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1211,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_60.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1332,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneIdel_61.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1453,
+						"y": 577,
+						"w": 119,
+						"h": 190
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:69cf4071a068caee71bf6a56faaf7e75:ffe558f413d8ff663458743946ace92f:866fd8b78e162769fc4904ed795757ca$"
+	}
+}

@@ -1,0 +1,45 @@
+{
+    "name": "node-fish",
+    "version": "1.4.14",
+    "private": true,
+    "main": "./dist/app",
+    "scripts": {
+        "build": "tsc",
+        "start": "yarn run build && cd dist &&  node app",
+        "dev": "node tsrun.js",
+        "test": "yarn run test:game-code && yarn run build",
+        "test:game-code": "yarn ts-node test/pilotChickenSettlement.test.ts && yarn ts-node test/globalRiskDailyProgress.test.ts",
+        "cov": "nyc mocha",
+        "ci": "yarn run test",
+        "gen-api-ref": "node ../../../node_modules/typedoc/bin/typedoc --mode file --hideGenerator --excludeExternals --ignoreCompilerErrors --out ../../../run/site/public/api-reference/pinus-loader lib/"
+    },
+    "dependencies": {
+        "@types/bluebird": "^3.5.36",
+        "@types/crc": "^3.4.0",
+        "@types/mysql": "^2.15.21",
+        "@types/node": "^17.0.23",
+        "axios": "^0.27.2",
+        "bluebird": "3.7.2",
+        "cors": "^2.8.5",
+        "crc": "^4.1.0",
+        "decimal.js": "^10.4.3",
+        "errorhandler": "^1.5.1",
+        "express": "^4.17.3",
+        "method-override": "^3.0.0",
+        "mysql2": "^2.3.3",
+        "pinus": "^1.6.3",
+        "pinus-robot": "^1.6.3",
+        "pinus-robot-plugin": "^1.6.3",
+        "pomelo-sync": "^0.0.4",
+        "reflect-metadata": "^0.1.13",
+        "request": "^2.88.2",
+        "source-map-support": "^0.5.21",
+        "ts-node": "^10.7.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "tslint": "^5.20.1",
+        "typescript": "4.6.3"
+    },
+    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

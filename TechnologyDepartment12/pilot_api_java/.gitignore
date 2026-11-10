@@ -1,0 +1,19 @@
+# 项目排除路径
+/target/
+dist/
+node_modules/
+/logs/
+.idea/
+
+
+/docs/
+
+# 本地数据库脚本默认不纳入版本控制
+*.sql
+
+# Java 后端数据库初始化与迁移脚本需要纳入版本控制
+!src/main/resources/db/
+!src/main/resources/db/*.sql
+
+# 仅供本地环境手工执行的脚本不纳入版本控制
+src/main/resources/db/local/

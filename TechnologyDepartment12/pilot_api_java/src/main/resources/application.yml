@@ -1,0 +1,60 @@
+spring:
+  profiles:
+    active: dev
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  cache:
+    redis:
+      key-prefix: aviator
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Kolkata
+    serialization:
+      write-dates-as-timestamps: false
+
+# IP 白名单配置
+ip:
+  whitelist:
+    enabled: false
+
+server:
+  port: 8880
+  shutdown: graceful
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.politapi.entity
+  global-config:
+    db-config:
+      id-type: auto
+      table-underline: true
+      logic-delete-field: deletedAt
+      logic-delete-value: now()
+      logic-not-delete-value: 'null'
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: false
+
+jwt:
+  secret: polit-api-jwt-secret-2024
+  expiration: 86400000
+
+# PHP Redis key 前缀（PHP database.php REDIS_PREFIX 默认值）
+redis:
+  prefix: laravel_database_
+
+# 接口文档访问认证
+docs:
+  auth:
+    username: admin
+    password: REDACTED
+
+# SpringDoc OpenAPI 配置
+springdoc:
+  api-docs:
+    path: /v1/api-docs
+  paths-to-exclude: /admin/**, /auth/login, /auth/logout, /auth/refresh, /user/info, /auth/codes, /menu/all, /api/freeBet/use, /api/freeBet/recover

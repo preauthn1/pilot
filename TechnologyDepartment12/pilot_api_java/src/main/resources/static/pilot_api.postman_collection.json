@@ -1,0 +1,266 @@
+{
+  "info": {
+    "name": "Pilot API",
+    "description": "# Pilot 游戏平台 — 商户对接接口\n\n## 使用说明\n\n1. 导入此文件到 Postman（File → Import）\n2. 创建 Environment，设置以下变量：\n   - `base_url` — 服务地址\n   - `channel` — 渠道名称\n   - `username` — 测试用户名\n3. 按文件夹顺序从上到下执行\n\n> 金额单位：分（1元=100分）\n> 返回格式：{ code:0, message:\"success\", data:{...} }",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "variable": [
+      { "key": "base_url", "value": "http://localhost:8880" },
+      { "key": "channel", "value": "channel_tiktok" },
+      { "key": "username", "value": "test_player" }
+    ]
+  },
+  "item": [
+    {
+      "name": "1-商户对接流程（按顺序执行）",
+      "item": [
+        {
+          "name": "① 检查用户是否存在",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"channel\": \"{{channel}}\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/userExist", "host": ["{{base_url}}"], "path": ["userExist"] },
+            "description": "根据用户名+渠道检查用户是否已注册\n\ncode=0 → 已存在\ncode=304 → 不存在"
+          },
+          "response": []
+        },
+        {
+          "name": "② 创建用户",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"merchantId\": \"1\",\n  \"channelId\": 1,\n  \"currency\": \"INR\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/createUser", "host": ["{{base_url}}"], "path": ["createUser"] },
+            "description": "创建用户。merchantId 是字符串，channelId 是数字。\n如用户已存在可跳过此步。"
+          },
+          "response": []
+        },
+        {
+          "name": "③ 上分（转入游戏币）",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"channel\": \"{{channel}}\",\n  \"money\": 100000,\n  \"orderId\": \"IN_{{username}}_{{$timestamp}}\",\n  \"currency\": \"INR\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/transfer/in", "host": ["{{base_url}}"], "path": ["transfer","in"] },
+            "description": "从渠道余额转入用户余额。\n\nmoney: 100000分 = 1000元\norderId: 必须唯一，重复提交返回 code=105\n\n错误码:\n202-渠道余额不足\n105-订单号重复\n305-玩家游戏中"
+          },
+          "response": []
+        },
+        {
+          "name": "④ 查询余额",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"channel\": \"{{channel}}\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/transfer/getUserAmount", "host": ["{{base_url}}"], "path": ["transfer","getUserAmount"] },
+            "description": "返回 data.amount（单位：分）"
+          },
+          "response": []
+        },
+        {
+          "name": "⑤ 登录获取游戏链接",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"channel\": \"{{channel}}\",\n  \"currency\": \"INR\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/login", "host": ["{{base_url}}"], "path": ["login"] },
+            "description": "首次登录自动创建用户。返回 data.url 即为游戏入口，将用户重定向到此地址即可。\n\n返回示例：\n{ \"code\":0, \"data\":{ \"url\":\"https://game.example.com?token=abc...\", \"username\":\"test_player\", \"channelId\":1 } }"
+          },
+          "response": []
+        },
+        {
+          "name": "⑥ 下分（全额取回）",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"channel\": \"{{channel}}\",\n  \"money\": 0,\n  \"orderId\": \"OUT_{{username}}_{{$timestamp}}\",\n  \"isFull\": 1\n}"
+            },
+            "url": { "raw": "{{base_url}}/transfer/out", "host": ["{{base_url}}"], "path": ["transfer","out"] },
+            "description": "从用户余额扣款返回渠道余额。\n\nisFull=1 → 全额转出（忽略 money）\n也可以设 isFull=0 并指定 money 部分转出\n\n错误码:\n307-用户余额不足\n305-玩家游戏中\n105-订单号重复"
+          },
+          "response": []
+        },
+        {
+          "name": "⑦ 转账订单查询",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"{{channel}}\",\n  \"orderId\": \"IN_test_player_...\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/order/transfer", "host": ["{{base_url}}"], "path": ["order","transfer"] },
+            "description": "用上分/下分时的 orderId 查询处理结果\nstatus: success → 已处理\nstatus: noExist → 不存在"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2-注单查询",
+      "item": [
+        {
+          "name": "注单记录（投注明细）",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"{{channel}}\",\n  \"username\": \"{{username}}\",\n  \"start\": 1718640000,\n  \"end\": 1718726400\n}"
+            },
+            "url": { "raw": "{{base_url}}/order/getCoinRecord", "host": ["{{base_url}}"], "path": ["order","getCoinRecord"] },
+            "description": "start/end 为 Unix 时间戳（秒）"
+          },
+          "response": []
+        },
+        {
+          "name": "渠道汇总记录",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"{{channel}}\",\n  \"start\": 1718640000,\n  \"end\": 1718726400\n}"
+            },
+            "url": { "raw": "{{base_url}}/order/getChannelSumRecord", "host": ["{{base_url}}"], "path": ["order","getChannelSumRecord"] },
+            "description": "渠道维度：投注总额、派彩、玩家输赢、平台输赢"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3-免费下注",
+      "item": [
+        {
+          "name": "发放免费次数",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"channel\": \"{{channel}}\",\n  \"count\": 5,\n  \"activityId\": \"act_summer_promo\",\n  \"sourceOrderId\": \"ACT_{{username}}_{{$timestamp}}\",\n  \"expireAt\": \"2025-12-31 23:59:59\",\n  \"sign\": \"<签名>\",\n  \"timestamp\": {{$timestamp}}\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/freeBet/grant", "host": ["{{base_url}}"], "path": ["api","freeBet","grant"] },
+            "description": "需要签名验证。\nsourceOrderId 为幂等键。\nexpireAt 格式: yyyy-MM-dd HH:mm:ss"
+          },
+          "response": []
+        },
+        {
+          "name": "查询剩余次数",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\",\n  \"channel\": \"{{channel}}\",\n  \"sign\": \"<签名>\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/freeBet/remain", "host": ["{{base_url}}"], "path": ["api","freeBet","remain"] },
+            "description": "返回剩余次数、单次金额、最近到期时间"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4-游戏配置（前端调用）",
+      "item": [
+        {
+          "name": "获取游戏设置",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/gameSetting", "host": ["{{base_url}}"], "path": ["api","gameSetting"] },
+            "description": "返回投注额范围、结算倍数、振幅、规则说明"
+          },
+          "response": []
+        },
+        {
+          "name": "获取服务器配置",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"channel\": \"{{channel}}\"}" },
+            "url": { "raw": "{{base_url}}/api/server/getConfig", "host": ["{{base_url}}"], "path": ["api","server","getConfig"] },
+            "description": "返回可用游戏服地址列表"
+          },
+          "response": []
+        },
+        {
+          "name": "获取机器人设置",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"channel\": \"{{channel}}\"}" },
+            "url": { "raw": "{{base_url}}/robot/getSetting", "host": ["{{base_url}}"], "path": ["robot","getSetting"] },
+            "description": "返回机器人行为参数"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5-任务系统",
+      "item": [
+        {
+          "name": "任务列表",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/getTaskList", "host": ["{{base_url}}"], "path": ["getTaskList"] },
+            "description": "返回所有启用状态的任务"
+          },
+          "response": []
+        },
+        {
+          "name": "领取任务",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"task_id\": 1,\n  \"username\": \"{{username}}\",\n  \"channel\": 1\n}" },
+            "url": { "raw": "{{base_url}}/getTaskUserCreate", "host": ["{{base_url}}"], "path": ["getTaskUserCreate"] },
+            "description": "每人每任务只能领取一次"
+          },
+          "response": []
+        },
+        {
+          "name": "我的任务",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"{{username}}\",\n  \"channel\": \"{{channel}}\"\n}" },
+            "url": { "raw": "{{base_url}}/myTask", "host": ["{{base_url}}"], "path": ["myTask"] },
+            "description": "查询已领取/完成的任务列表"
+          },
+          "response": []
+        },
+        {
+          "name": "任务资金记录",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\": \"{{username}}\"}" },
+            "url": { "raw": "{{base_url}}/myTaskCapital", "host": ["{{base_url}}"], "path": ["myTaskCapital"] },
+            "description": "任务奖励资金流水"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

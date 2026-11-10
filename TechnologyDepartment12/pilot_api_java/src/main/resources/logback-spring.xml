@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--
+        polit-api Logback 配置
+        ======================
+        双实例端口隔离  |  dev/prod 环境分离  |  RollingFile 轮转归档
+        错误日志分离    |  审计日志独立输出    |  MDC TraceId 支持
+    -->
+
+    <!-- ===== 读取 Spring 属性 ===== -->
+    <springProperty scope="context" name="SERVER_PORT" source="server.port" defaultValue="8880"/>
+    <springProperty scope="context" name="APP_NAME"   source="spring.application.name" defaultValue="polit-api"/>
+
+    <!-- ===== 基础路径（按端口隔离双实例日志） ===== -->
+    <property name="LOG_HOME" value="logs/${SERVER_PORT}"/>
+
+    <!-- ===== 日志格式 ===== -->
+    <!-- 文件：带 TraceId 的完整格式 -->
+    <property name="FILE_PATTERN"
+        value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{traceId:-}] %-5level %logger{36} - %msg%n"/>
+    <!-- 控制台：带颜色高亮 -->
+    <property name="CONSOLE_PATTERN"
+        value="%d{HH:mm:ss.SSS} %highlight(%-5level){ERROR=red,WARN=yellow,INFO=cyan,DEBUG=green,TRACE=gray} [%thread] %cyan([%X{traceId:-}]) %blue(%logger{36}) - %msg%n"/>
+    <!-- 审计：简洁格式 -->
+    <property name="AUDIT_PATTERN"
+        value="%d{yyyy-MM-dd HH:mm:ss.SSS} %msg%n"/>
+
+    <!-- ======================== 开发环境 ======================== -->
+    <springProfile name="dev">
+
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${CONSOLE_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <appender name="DEV_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_HOME}/app.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_HOME}/app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <maxFileSize>50MB</maxFileSize>
+                <maxHistory>7</maxHistory>
+                <totalSizeCap>500MB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${FILE_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="DEV_FILE"/>
+        </root>
+
+        <!-- 业务包 DEBUG，可看到 MyBatis SQL -->
+        <logger name="com.politapi" level="DEBUG"/>
+
+    </springProfile>
+
+    <!-- ======================== 生产环境 ======================== -->
+    <springProfile name="prod">
+
+        <!-- 控制台（纯文本格式，供 systemd journal / docker logs 采集） -->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${FILE_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <!-- 业务日志（按大小+时间轮转，gzip 归档） -->
+        <appender name="APP_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_HOME}/app.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_HOME}/app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+                <maxFileSize>100MB</maxFileSize>
+                <maxHistory>30</maxHistory>
+                <totalSizeCap>5GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${FILE_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <!-- 错误日志（ERROR 及以上独立输出，快速定位） -->
+        <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_HOME}/error.log</file>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>ERROR</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+                <maxFileSize>100MB</maxFileSize>
+                <maxHistory>60</maxHistory>
+                <totalSizeCap>5GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${FILE_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <!-- 审计操作日志（替代原 LogUtil.write()，独立文件不混入业务日志） -->
+        <appender name="AUDIT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_HOME}/audit/operation.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_HOME}/audit/operation.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+                <maxFileSize>50MB</maxFileSize>
+                <maxHistory>90</maxHistory>
+                <totalSizeCap>2GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${AUDIT_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <!-- 根：WARN 以上（框架噪音过滤） -->
+        <root level="WARN">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="APP_FILE"/>
+            <appender-ref ref="ERROR_FILE"/>
+        </root>
+
+        <!-- 业务包 INFO -->
+        <logger name="com.politapi" level="INFO"/>
+
+        <!-- 审计日志：独立 logger，不向上传播（additivity=false） -->
+        <logger name="AUDIT" level="INFO" additivity="false">
+            <appender-ref ref="AUDIT_FILE"/>
+        </logger>
+
+    </springProfile>
+
+</configuration>

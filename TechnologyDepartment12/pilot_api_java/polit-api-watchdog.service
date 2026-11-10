@@ -1,0 +1,21 @@
+[Unit]
+Description=polit-api Hot Reload Watchdog
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/www/wwwroot/flygame.xyz/api
+ExecStart=/bin/bash /www/wwwroot/flygame.xyz/api/watchdog.sh
+ExecStop=/bin/kill -SIGTERM $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=append:/www/wwwroot/flygame.xyz/api/logs/watchdog.log
+StandardError=append:/www/wwwroot/flygame.xyz/api/logs/watchdog-error.log
+
+# 安全加固（可选）
+# PrivateTmp=true
+# NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

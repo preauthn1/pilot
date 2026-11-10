@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.politapi.mapper.ChannelReportMapper">
+
+    <sql id="channelReportWhere">
+        WHERE 1 = 1
+        <if test="merchant_id != null and merchant_id != ''">
+            AND merchant_id = #{merchant_id}
+        </if>
+        <if test="channel_id != null and channel_id != ''">
+            AND channel_id = #{channel_id}
+        </if>
+        <if test="tag != null and tag != ''">
+            AND tag = #{tag}
+        </if>
+        <choose>
+            <when test="game_code == '__legacy__'">
+                AND game_code IS NULL
+            </when>
+            <when test="game_code != null and game_code != ''">
+                AND game_code = #{game_code}
+            </when>
+        </choose>
+        <if test="start_at != null and start_at != '' and end_at != null and end_at != ''">
+            AND created_at BETWEEN #{start_at} AND #{end_at}
+        </if>
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND channel_id IN
+            <foreach collection="allowedChannelIds" item="cid" open="(" separator="," close=")">
+                #{cid}
+            </foreach>
+        </if>
+    </sql>
+
+    <sql id="reportSelectColumns">
+        <choose>
+            <when test="grain == 'channel'">
+                id,
+                merchant_id AS merchantId,
+                channel_id AS channelId,
+                created_at AS createdAt,
+                updated_at AS updatedAt,
+                bets_number AS betsNumber,
+                bets,
+                payout,
+                player_wl AS playerWl,
+                platform_wl AS platformWl,
+                tag
+                , game_code AS gameCode
+            </when>
+            <when test="grain == 'merchant'">
+                merchant_id AS merchantId,
+                tag,
+                game_code AS gameCode,
+                MIN(created_at) AS createdAt,
+                MAX(updated_at) AS updatedAt,
+                IFNULL(SUM(bets_number), 0) AS betsNumber,
+                IFNULL(SUM(bets), 0) AS bets,
+                IFNULL(SUM(payout), 0) AS payout,
+                IFNULL(SUM(player_wl), 0) AS playerWl,
+                IFNULL(SUM(platform_wl), 0) AS platformWl
+            </when>
+            <otherwise>
+                DATE(created_at) AS `date`,
+                tag,
+                game_code AS gameCode,
+                MIN(created_at) AS createdAt,
+                MAX(updated_at) AS updatedAt,
+                IFNULL(SUM(bets_number), 0) AS betsNumber,
+                IFNULL(SUM(bets), 0) AS bets,
+                IFNULL(SUM(payout), 0) AS payout,
+                IFNULL(SUM(player_wl), 0) AS playerWl,
+                IFNULL(SUM(platform_wl), 0) AS platformWl
+            </otherwise>
+        </choose>
+    </sql>
+
+    <sql id="reportGroupBy">
+        <choose>
+            <when test="grain == 'channel'">
+            </when>
+            <when test="grain == 'merchant'">
+                GROUP BY DATE(created_at), merchant_id, tag, game_code
+            </when>
+            <otherwise>
+                GROUP BY DATE(created_at), tag, game_code
+            </otherwise>
+        </choose>
+    </sql>
+
+    <sql id="reportOrderBy">
+        <choose>
+            <when test="grain == 'channel'">
+                ORDER BY t.createdAt DESC, t.id DESC
+            </when>
+            <when test="grain == 'merchant'">
+                ORDER BY t.createdAt DESC, t.merchantId DESC, t.tag ASC
+            </when>
+            <otherwise>
+                ORDER BY t.`date` DESC, t.tag ASC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <sql id="reportGroups">
+        SELECT
+            <include refid="reportSelectColumns"/>
+        FROM ams_channel_report
+        <include refid="channelReportWhere"/>
+        <include refid="reportGroupBy"/>
+    </sql>
+
+    <select id="selectReportList" resultType="java.util.LinkedHashMap">
+        SELECT *
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+        <include refid="reportOrderBy"/>
+        LIMIT #{offsetRows}, #{limit}
+    </select>
+
+    <select id="countReportList" resultType="long">
+        SELECT COUNT(1)
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+    </select>
+
+    <select id="sumReportList" resultType="java.util.LinkedHashMap">
+        SELECT
+            IFNULL(SUM(t.bets), 0) AS totalBets,
+            IFNULL(SUM(t.payout), 0) AS totalPayOut,
+            IFNULL(SUM(t.playerWl), 0) AS totalPlayerWinOrLoss,
+            IFNULL(SUM(t.platformWl), 0) AS totalWinOrLoss
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+    </select>
+
+    <select id="selectMerchantReportList" resultType="java.util.LinkedHashMap">
+        <bind name="grain" value="'merchant'"/>
+        SELECT *
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+        ORDER BY t.createdAt DESC, t.merchantId DESC, t.tag ASC
+        LIMIT #{offsetRows}, #{limit}
+    </select>
+
+    <select id="countMerchantReportList" resultType="long">
+        <bind name="grain" value="'merchant'"/>
+        SELECT COUNT(1)
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+    </select>
+
+    <select id="sumMerchantReportList" resultType="java.util.LinkedHashMap">
+        <bind name="grain" value="'merchant'"/>
+        SELECT
+            IFNULL(SUM(t.bets), 0) AS totalBets,
+            IFNULL(SUM(t.payout), 0) AS totalPayOut,
+            IFNULL(SUM(t.playerWl), 0) AS totalPlayerWinOrLoss,
+            IFNULL(SUM(t.platformWl), 0) AS totalWinOrLoss
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+    </select>
+
+    <select id="selectDailyReportList" resultType="java.util.LinkedHashMap">
+        <bind name="grain" value="'daily'"/>
+        SELECT *
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+        ORDER BY t.`date` DESC, t.tag ASC
+        LIMIT #{offsetRows}, #{limit}
+    </select>
+
+    <select id="countDailyReportList" resultType="long">
+        <bind name="grain" value="'daily'"/>
+        SELECT COUNT(1)
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+    </select>
+
+    <select id="sumDailyReportList" resultType="java.util.LinkedHashMap">
+        <bind name="grain" value="'daily'"/>
+        SELECT
+            IFNULL(SUM(t.bets), 0) AS totalBets,
+            IFNULL(SUM(t.payout), 0) AS totalPayOut,
+            IFNULL(SUM(t.playerWl), 0) AS totalPlayerWinOrLoss,
+            IFNULL(SUM(t.platformWl), 0) AS totalWinOrLoss
+        FROM (
+            <include refid="reportGroups"/>
+        ) t
+    </select>
+
+</mapper>

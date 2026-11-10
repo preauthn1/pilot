@@ -1,0 +1,196 @@
+name: Build and deploy game server
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-pilot-game-server
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip deploy]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Test and build
+        run: yarn test
+
+      - name: Prepare production dependencies
+        run: yarn install --production --frozen-lockfile --ignore-scripts
+
+      - name: Package artifact
+        run: |
+          test -s dist/app.js
+          tar -czf /tmp/pilot-game-server-${GITHUB_SHA}.tar.gz \
+            dist node_modules package.json yarn.lock
+
+      - name: Validate deployment secrets
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          test -n "$SSH_HOST"
+          test -n "$SSH_KNOWN_HOSTS"
+          test -n "$SSH_PORT"
+          test -n "$SSH_PRIVATE_KEY"
+          test -n "$SSH_USER"
+
+      - name: Configure SSH
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/pilot_deploy
+          chmod 600 ~/.ssh/pilot_deploy
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Upload artifact
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          scp -i ~/.ssh/pilot_deploy -P "$SSH_PORT" \
+            /tmp/pilot-game-server-${GITHUB_SHA}.tar.gz \
+            "$SSH_USER@$SSH_HOST:/tmp/pilot-game-server-${GITHUB_SHA}.tar.gz"
+
+      - name: Deploy with rollback
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          ssh -i ~/.ssh/pilot_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "bash -s -- '$GITHUB_SHA'" <<'REMOTE'
+          set -euo pipefail
+          version="$1"
+          app_dir=/www/wwwroot/pilot/game_servers
+          deploy_dir=/www/wwwroot/pilot/.deploy/game-server
+          archive="/tmp/pilot-game-server-${version}.tar.gz"
+          stage_dir="$deploy_dir/stage/$version"
+          backup_dir="$deploy_dir/backups/$version"
+          switched=false
+
+          run_pinus() {
+            local pinus_bin="$app_dir/node_modules/.bin/pinus"
+            if [ -x "$pinus_bin" ]; then
+              "$pinus_bin" "$@"
+            else
+              sh "$pinus_bin" "$@"
+            fi
+          }
+
+          stop_server() {
+            if [ -s "$app_dir/node_modules/.bin/pinus" ] && [ -d "$app_dir/dist" ]; then
+              (cd "$app_dir/dist" && run_pinus stop) || true
+            else
+              (cd "$app_dir/dist" && pinus stop) || true
+            fi
+          }
+
+          start_server() {
+            cd "$app_dir/dist"
+            run_pinus start -e production -D
+          }
+
+          rollback() {
+            status=$?
+            trap - EXIT
+            set +e
+            if [ "$switched" = true ] && [ "$status" -ne 0 ]; then
+              echo "Deployment failed; restoring $backup_dir"
+              stop_server
+              rm -rf "$app_dir/dist" "$app_dir/node_modules"
+              cp -a "$backup_dir/dist" "$app_dir/dist"
+              cp -a "$backup_dir/node_modules" "$app_dir/node_modules"
+              cp -a "$backup_dir/package.json" "$app_dir/package.json"
+              if [ -f "$backup_dir/yarn.lock" ]; then
+                cp -a "$backup_dir/yarn.lock" "$app_dir/yarn.lock"
+              else
+                rm -f "$app_dir/yarn.lock"
+              fi
+              start_server
+            fi
+            rm -rf "$stage_dir" "$archive"
+            exit "$status"
+          }
+          trap rollback EXIT
+
+          test -s "$archive"
+          test -d "$app_dir/dist"
+          test -d "$app_dir/node_modules"
+          rm -rf "$stage_dir" "$backup_dir"
+          mkdir -p "$stage_dir" "$backup_dir"
+          tar -xzf "$archive" -C "$stage_dir"
+          test -s "$stage_dir/dist/app.js"
+          test -s "$stage_dir/node_modules/.bin/pinus"
+
+          for config_file in mysql secret http master setting; do
+            if [ -f "$app_dir/dist/config/${config_file}.js" ]; then
+              cp -a "$app_dir/dist/config/${config_file}.js" \
+                "$stage_dir/dist/config/${config_file}.js"
+            fi
+          done
+
+          cp -a "$app_dir/dist" "$backup_dir/dist"
+          cp -a "$app_dir/node_modules" "$backup_dir/node_modules"
+          cp -a "$app_dir/package.json" "$backup_dir/package.json"
+          if [ -f "$app_dir/yarn.lock" ]; then
+            cp -a "$app_dir/yarn.lock" "$backup_dir/yarn.lock"
+          fi
+
+          stop_server
+          switched=true
+          rm -rf "$app_dir/dist" "$app_dir/node_modules"
+          mv "$stage_dir/dist" "$app_dir/dist"
+          mv "$stage_dir/node_modules" "$app_dir/node_modules"
+          install -m 644 "$stage_dir/package.json" "$app_dir/package.json"
+          install -m 644 "$stage_dir/yarn.lock" "$app_dir/yarn.lock"
+          start_server
+
+          healthy=false
+          for attempt in $(seq 1 30); do
+            if timeout 3 bash -c '</dev/tcp/127.0.0.1/3050' 2>/dev/null; then
+              healthy=true
+              break
+            fi
+            sleep 2
+          done
+          test "$healthy" = true
+
+          switched=false
+          rm -rf "$stage_dir" "$archive"
+          find "$deploy_dir/backups" -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' \
+            | sort -nr | tail -n +6 | cut -d' ' -f2- | xargs -r rm -rf --
+          trap - EXIT
+          echo "Game server deployed: $version"
+          REMOTE

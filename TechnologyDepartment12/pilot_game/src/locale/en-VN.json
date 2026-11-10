@@ -1,0 +1,50 @@
+{
+  "tips": {
+    "login_timeout": "Đã hết thời gian đăng nhập, vui lòng đăng nhập lại",
+    "channel_error": "kênh không tồn tại",
+    "channel_maintenance": "bảo trì kênh",
+    "get_data_fail": "Không lấy được dữ liệu",
+    "connect_fail": "Kết nối thất bại",
+    "connect_lost": "Mất kết nối, vui lòng đăng nhập lại",
+    "bet_fail": "Đặt cược không thành công, không đủ số dư",
+    "enter_error": "Vào nhầm phòng!",
+    "request_fail": "Yêu cầu không thành công",
+    "token_error": "Mã không hợp lệ"
+  },
+  "btn": {
+    "confirm": "xác nhận",
+    "bet": "cá cược",
+    "cancel": "Hủy bỏ",
+    "wait": "đợi lượt sau",
+    "cash_out": "đổi tiền"
+  },
+  "game": {
+    "auto_bet": "cá cược tự động",
+    "auto_cash_out": "đổi tiền tự động",
+    "wait": "đợi lượt sau",
+    "end": "thoát khỏi",
+    "history": "vòng lịch sử",
+    "total_bet": "Tổng tiền cược",
+    "previous_round": "vòng trước",
+    "current_round": "Vòng này",
+    "cash_out": "tiền mặt",
+    "cash_out_btn": "tiền mặt",
+    "multiple": "số nhân",
+    "multiple_btn": "số nhân",
+    "player": "người chơi",
+    "date": "ngày",
+    "bet": "cá cược",
+    "game_rule": "luật chơi game",
+    "win": "bạn thắng",
+    "win_multiple": "chi tiền mặt của bạn là bao nhiêu",
+    "all": "tất cả",
+    "mine": "của tôi",
+    "rank": "xếp hạng",
+    "countdown":"đếm ngược",
+    "start":"bắt đầu",
+    "change_lang":"Chọn ngôn ngữ",
+    "confirm":"xác nhận"
+  },
+  "rule": "<h1>làm thế nào để chơi</h1><p>Rocket Flight là một thế hệ giải trí iGaming mới. Bạn có thể giành chiến thắng nhiều lần trong vài giây! Rocket Flight được xây dựng trên một hệ thống công bằng có thể chứng minh được, sự đảm bảo tính toàn thực sự duy nhất trong ngành công nghiệp cờ bạc hiện nay. </p><h2>Rocket bay rất dễ chơi như 1-2-3:</h2><p>1. Đặt cược trước khi máy bay cất cánh。</p><p>2. Tiền thắng của bạn sẽ tăng lên khi máy bay may mắn của bạn cất cánh。</p><p>3. đổi tiền và giành được X lần số tiền thưởng trước khi máy bay biến mất! </p>\n<h1>biết thêm chi tiết</h1><p>Hệ số chiến thắng bắt đầu từ 1 lần và tăng lên khi máy bay may mắn cất cánh。</p><p>Tiền thắng cược của bạn được tính bằng bội số khi bạn rút tiền, nhân với số tiền đặt cược của bạn。</p><p>Trước khi mỗi vòng của trò chơi bắt đầu, trình tạo số ngẫu nhiên hợp lý có thể chứng minh của chúng tôi sẽ tạo ra một hệ số nhân cho chiếc máy bay may mắn bay đi。 </p>\n<h1>Tính năng trò chơi</h1><h2>Cược và Rút tiền</h2><p>1. Chọn số tiền và nhấn nút 'Đặt cược' để đặt cược。</p><p>2.Bạn có thể đặt hai cược cùng một lúc bằng cách thêm bàn cược thứ hai. Để thêm bàn cược thứ hai, hãy nhấn biểu tượng dấu cộng ở góc trên bên phải của bàn cược đầu tiên。</p><p> 3.Nhấn nút 'đổi tiền' để rút tiền thắng cược của bạn. Chiến thắng của bạn là bội số tiền đặt cược của bạn nhân với số tiền bạn rút ra。</p><p> 4.Nếu bạn không đổi tiền trước khi máy bay cất cánh, tiền cược của bạn sẽ bị thua。</p>\n<h2>Cá cược tự động và rút tiền mặt tự động</h2><p>1. Tự động phát được kích hoạt từ tab Tự động phát của Bảng Cược bằng cách nhấn nút Tự động phát。 </p><p> 2.Tự động đổi tiền có sẵn từ tab 'Tự động' trên bảng cá cược. Sau khi được kích hoạt, cược của bạn sẽ tự động được chuyển thành tiền mặt khi đạt đến hệ số đã nhập。</p>\n<h2>Cược Trực tiếp và Thống kê</h2><p>1. Ở bên trái giao diện trò chơi (hoặc dưới bảng cá cược trên di động) có bảng cá cược trực tiếp. Tại đây bạn có thể xem tất cả các cược cho vòng hiện tại。</p><p>2.  Trên bảng 'Cược của tôi', bạn có thể xem tất cả các lần đặt cược và đổi tiền của mình。</p><p>3.Trong bảng 'Top', có thống kê trò chơi. Bạn có thể duyệt số tiền thắng cược của mình theo số tiền hoặc nhiều lần rút tiền và xem bội số vòng lớn nhất。</p>\n<h1 class=\"title\">khác</h1><p>1. Nếu kết nối internet bị gián đoạn trong khi đặt cược, trò chơi sẽ tự động được quy ra tiền mặt theo hệ số hiện tại và số tiền thắng sẽ được cộng vào số dư của bạn。</p><p>2.  Trong trường hợp lỗi phần cứng / phần mềm trò chơi, tất cả các cược trò chơi bị ảnh hưởng và các khoản thanh toán sẽ bị vô hiệu và tất cả các cược bị ảnh hưởng sẽ được hoàn trả。</p><div style='height:50px;'></div>"
+
+}

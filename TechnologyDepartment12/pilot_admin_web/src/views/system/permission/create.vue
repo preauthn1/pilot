@@ -1,0 +1,138 @@
+<template>
+  <div>
+    <el-form ref="form" :model="form" label-width="auto">
+      <el-form-item
+        :label="$t('permission.name')"
+        prop="name"
+        :error="error.name ? error.name[0] : ''"
+      >
+        <el-input v-model="form.name" maxlength="60" show-word-limit />
+      </el-form-item>
+      <el-form-item :label="$t('permission.fileName')" prop="fileName">
+        <el-input v-model="form.fileName" maxlength="60" show-word-limit />
+      </el-form-item>
+      <el-form-item
+        :label="$t('permission.title')"
+        prop="title"
+        :error="error.title ? error.title[0] : ''"
+      >
+        <el-input v-model="form.title" maxlength="60" show-word-limit />
+      </el-form-item>
+      <el-form-item
+        :label="$t('permission.path')"
+        prop="path"
+        :error="error.path ? error.path[0] : ''"
+      >
+        <el-input v-model="form.path" maxlength="60" show-word-limit />
+      </el-form-item>
+      <el-form-item
+        :label="$t('permission.component')"
+        prop="component"
+        :error="error.component ? error.component[0] : ''"
+      >
+        <el-input v-model="form.component" maxlength="60" show-word-limit />
+      </el-form-item>
+      <el-form-item
+        :label="$t('permission.sort')"
+        prop="sort"
+        :error="error.sort ? error.sort[0] : ''"
+      >
+        <el-input-number v-model="form.sort" :min="1" :max="999" />
+      </el-form-item>
+      <el-form-item
+        :label="$t('permission.hidden')"
+        prop="hidden"
+        :error="error.hidden ? error.hidden[0] : ''"
+      >
+        <el-radio-group v-model="form.hidden">
+          <el-radio :label="0">{{ $t('permission.nav') }}</el-radio>
+          <el-radio :label="1">{{ $t('permission.btn') }}</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item :label="$t('permission.noKeepAlive')" prop="noKeepAlive">
+        <el-switch
+          v-model="form.noKeepAlive"
+          :active-value="1"
+          :inactive-value="0"
+        ></el-switch>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" :loading="loading" @click="onSubmit('form')">
+          {{ $t('common.submit') }}
+        </el-button>
+        <el-button @click="resetForm('form')">
+          {{ $t('common.reset') }}
+        </el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
+
+<script>
+  import { create } from '@/api/permission'
+  export default {
+    name: 'Create',
+    props: {
+      success: {
+        type: Function,
+        default: null,
+      },
+      pid: {
+        type: Number,
+        default: 0,
+        required: true,
+      },
+    },
+    data() {
+      return {
+        form: {
+          name: '',
+          title: '',
+          icon: 'el-icon-document',
+          path: '',
+          component: '',
+          sort: 1,
+          hidden: 1,
+          fileName: '',
+          noKeepAlive: 0,
+        },
+        error: {},
+        loading: false,
+      }
+    },
+    methods: {
+      onSubmit(formName) {
+        this.loading = true
+        this.error = {}
+        const form = this.form
+        form.guard_name = 'admin'
+        if (this.pid > 0) {
+          form.pid = this.pid
+        }
+        create(form)
+          .then((response) => {
+            this.$message({
+              message: response.message,
+              type: 'success',
+            })
+            this.resetForm(formName)
+            this.success()
+          })
+          .catch((reason) => {
+            const { data } = reason.response
+            if (data.code === 422) {
+              this.error = data.data
+            }
+          })
+          .finally(() => {
+            this.loading = false
+          })
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields()
+      },
+    },
+  }
+</script>
+
+<style scoped></style>

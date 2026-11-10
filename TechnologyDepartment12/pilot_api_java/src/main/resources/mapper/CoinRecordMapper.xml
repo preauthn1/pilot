@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.politapi.mapper.CoinRecordMapper">
+
+    <!-- ==================== 投注记录列表 ==================== -->
+
+    <select id="getCoinRecordList" resultType="java.util.LinkedHashMap">
+        SELECT
+            a.id AS `id`,
+            c.merchant_id AS `merchantId`,
+            c.id AS `channelId`,
+            b.username AS `username`,
+            a.finish_time AS `finishTime`,
+            e.round_id AS `bureauNumber`,
+            a.bet_type AS `betType`,
+            a.bet AS `bet`,
+            a.tag AS `tag`,
+            a.game_code AS `gameCode`,
+            a.bet_time AS `betTime`,
+            a.settlement_multiple AS `settlementMultiple`,
+            e.billing_type AS `billingType`,
+            a.user_id AS `userId`,
+            e.result AS `result`,
+            a.pay_out AS `payOut`
+        FROM lms_coin_record a
+        LEFT JOIN ums_user b ON a.user_id = b.id
+        LEFT JOIN mms_channel c ON a.channel_id = c.id AND c.deleted_at IS NULL
+        LEFT JOIN lms_game_record e ON a.channel_id = e.channel_id AND a.round_id = e.round_id
+        WHERE a.user_id >= 10000
+        <if test="channelId != null and channelId != ''">
+            AND a.channel_id = #{channelId}
+        </if>
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND a.channel_id IN
+            <foreach collection="allowedChannelIds" item="cid" open="(" separator="," close=")">
+                #{cid}
+            </foreach>
+        </if>
+        <if test="merchantId != null and merchantId != ''">
+            AND c.merchant_id = #{merchantId}
+        </if>
+        <if test="username != null and username != ''">
+            AND b.username = #{username}
+        </if>
+        <if test="tag != null and tag != ''">
+            AND a.tag = #{tag}
+        </if>
+        <if test="bureauNumber != null and bureauNumber != ''">
+            AND e.round_id = #{bureauNumber}
+        </if>
+        <if test="id != null and id != ''">
+            AND a.id = #{id}
+        </if>
+        <if test="startAt != null and startAt != '' and endAt != null and endAt != ''">
+            AND a.expand_time BETWEEN #{startAt} AND #{endAt}
+        </if>
+        <choose>
+            <when test="sort != null and sort != '' and orderVal != null and orderVal != ''">
+                ORDER BY
+                <choose>
+                    <when test="sort == 'id'">a.id</when>
+                    <when test="sort == 'user_id'">a.user_id</when>
+                    <when test="sort == 'channel_id'">a.channel_id</when>
+                    <when test="sort == 'bet'">a.bet</when>
+                    <when test="sort == 'pay_out'">a.pay_out</when>
+                    <when test="sort == 'bet_type'">a.bet_type</when>
+                    <when test="sort == 'finish_time'">a.finish_time</when>
+                    <when test="sort == 'settlement_multiple'">a.settlement_multiple</when>
+                    <otherwise>a.expand_time</otherwise>
+                </choose>
+                <choose>
+                    <when test="orderVal == 'asc'">ASC</when>
+                    <otherwise>DESC</otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                ORDER BY a.expand_time DESC
+            </otherwise>
+        </choose>
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="getCoinRecordTotal" resultType="long">
+        SELECT COUNT(1)
+        FROM lms_coin_record a
+        LEFT JOIN ums_user b ON a.user_id = b.id
+        LEFT JOIN mms_channel c ON a.channel_id = c.id AND c.deleted_at IS NULL
+        LEFT JOIN lms_game_record e ON a.channel_id = e.channel_id AND a.round_id = e.round_id
+        WHERE a.user_id >= 10000
+        <if test="channelId != null and channelId != ''">
+            AND a.channel_id = #{channelId}
+        </if>
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND a.channel_id IN
+            <foreach collection="allowedChannelIds" item="cid" open="(" separator="," close=")">
+                #{cid}
+            </foreach>
+        </if>
+        <if test="merchantId != null and merchantId != ''">
+            AND c.merchant_id = #{merchantId}
+        </if>
+        <if test="username != null and username != ''">
+            AND b.username = #{username}
+        </if>
+        <if test="tag != null and tag != ''">
+            AND a.tag = #{tag}
+        </if>
+        <if test="bureauNumber != null and bureauNumber != ''">
+            AND e.round_id = #{bureauNumber}
+        </if>
+        <if test="id != null and id != ''">
+            AND a.id = #{id}
+        </if>
+        <if test="startAt != null and startAt != '' and endAt != null and endAt != ''">
+            AND a.expand_time BETWEEN #{startAt} AND #{endAt}
+        </if>
+    </select>
+
+    <!-- ==================== 首页仪表盘聚合 ==================== -->
+
+    <!-- 按 tag 聚合全量投注额/派彩额/盈亏 -->
+    <select id="totalAggByTag" resultType="java.util.LinkedHashMap">
+        SELECT
+            a.tag,
+            IFNULL(SUM(a.bet), 0) AS bets,
+            IFNULL(SUM(IF(a.pay_out > 0, a.pay_out, 0)), 0) AS payOut,
+            IFNULL(SUM(a.bet - a.pay_out), 0) AS winLows
+        FROM lms_coin_record a
+        LEFT JOIN ums_user b ON a.user_id = b.id
+        WHERE a.user_id >= 10000
+        AND a.tag = #{tag}
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND a.channel_id IN
+            <foreach collection="allowedChannelIds" item="channelId" open="(" separator="," close=")">
+                #{channelId}
+            </foreach>
+        </if>
+        GROUP BY a.tag
+    </select>
+
+    <!-- 按 tag 聚合今日投注额/派彩额/盈亏 -->
+    <select id="todayAggByTag" resultType="java.util.LinkedHashMap">
+        SELECT
+            a.tag,
+            IFNULL(SUM(a.bet), 0) AS bets,
+            IFNULL(SUM(IF(a.pay_out > 0, a.pay_out, 0)), 0) AS payOut,
+            IFNULL(SUM(a.bet - a.pay_out), 0) AS winLows
+        FROM lms_coin_record a
+        LEFT JOIN ums_user b ON a.user_id = b.id
+        WHERE a.user_id >= 10000
+        AND a.tag = #{tag}
+        AND a.created_at &gt;= #{start}
+        AND a.created_at &lt; #{end}
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND a.channel_id IN
+            <foreach collection="allowedChannelIds" item="channelId" open="(" separator="," close=")">
+                #{channelId}
+            </foreach>
+        </if>
+        GROUP BY a.tag
+    </select>
+
+    <!-- 按 tag 统计全量投注人数 -->
+    <select id="totalBetsNumByTag" resultType="long">
+        SELECT COUNT(DISTINCT a.user_id)
+        FROM lms_coin_record a
+        WHERE a.user_id >= 10000
+        AND a.tag = #{tag}
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND a.channel_id IN
+            <foreach collection="allowedChannelIds" item="channelId" open="(" separator="," close=")">
+                #{channelId}
+            </foreach>
+        </if>
+    </select>
+
+    <!-- 按 tag 统计今日投注人数 -->
+    <select id="todayBetsNumByTag" resultType="long">
+        SELECT COUNT(DISTINCT a.user_id)
+        FROM lms_coin_record a
+        WHERE a.user_id >= 10000
+        AND a.tag = #{tag}
+        AND a.created_at &gt;= #{start}
+        AND a.created_at &lt; #{end}
+        <if test="allowedChannelIds != null and !allowedChannelIds.isEmpty()">
+            AND a.channel_id IN
+            <foreach collection="allowedChannelIds" item="channelId" open="(" separator="," close=")">
+                #{channelId}
+            </foreach>
+        </if>
+    </select>
+
+    <!-- ==================== 渠道实时报表 ==================== -->
+
+    <select id="realtimeChannelReport" resultType="java.util.LinkedHashMap">
+        SELECT
+            DATE_FORMAT(a.created_at, '%Y-%m-%d') AS dayTime,
+            a.channel_id,
+            a.game_code AS gameCode,
+            COUNT(DISTINCT a.user_id) AS betsNumber,
+            IFNULL(SUM(a.bet), 0) AS bets,
+            IFNULL(SUM(a.pay_out), 0) AS payOut,
+            IFNULL(SUM(a.pay_out - a.bet), 0) AS playerWl,
+            IFNULL(SUM(a.bet - a.pay_out), 0) AS platformWl
+        FROM lms_coin_record a
+        WHERE a.channel_id = #{channelId}
+        <if test="tag != null and tag != ''">
+            AND a.tag = #{tag}
+        </if>
+        <choose>
+            <when test="gameCode == '__legacy__'">AND a.game_code IS NULL</when>
+            <when test="gameCode != null and gameCode != ''">AND a.game_code = #{gameCode}</when>
+        </choose>
+        <if test="startAt != null and startAt != ''">
+            AND a.created_at BETWEEN #{startAt} AND #{endAt}
+        </if>
+        GROUP BY DATE_FORMAT(a.created_at, '%Y-%m-%d'), a.channel_id, a.game_code
+        ORDER BY dayTime DESC
+        LIMIT #{offsetRows}, #{limit}
+    </select>
+
+    <select id="realtimeChannelReportTotal" resultType="long">
+        SELECT COUNT(1)
+        FROM (
+            SELECT DATE_FORMAT(a.created_at, '%Y-%m-%d') AS dayTime, a.channel_id
+            FROM lms_coin_record a
+            WHERE a.channel_id = #{channelId}
+            <if test="tag != null and tag != ''">
+                AND a.tag = #{tag}
+            </if>
+            <choose>
+                <when test="gameCode == '__legacy__'">AND a.game_code IS NULL</when>
+                <when test="gameCode != null and gameCode != ''">AND a.game_code = #{gameCode}</when>
+            </choose>
+            <if test="startAt != null and startAt != ''">
+                AND a.created_at BETWEEN #{startAt} AND #{endAt}
+            </if>
+            GROUP BY DATE_FORMAT(a.created_at, '%Y-%m-%d'), a.channel_id, a.game_code
+        ) t
+    </select>
+
+    <select id="realtimeChannelSummary" resultType="java.util.LinkedHashMap">
+        SELECT
+            IFNULL(SUM(a.bet), 0) AS bets,
+            IFNULL(SUM(a.pay_out), 0) AS payOut,
+            IFNULL(SUM(a.pay_out - a.bet), 0) AS playerWl,
+            IFNULL(SUM(a.bet - a.pay_out), 0) AS platformWl
+        FROM lms_coin_record a
+        WHERE a.channel_id = #{channelId}
+        <if test="tag != null and tag != ''">
+            AND a.tag = #{tag}
+        </if>
+        <choose>
+            <when test="gameCode == '__legacy__'">AND a.game_code IS NULL</when>
+            <when test="gameCode != null and gameCode != ''">AND a.game_code = #{gameCode}</when>
+        </choose>
+        <if test="startAt != null and startAt != ''">
+            AND a.created_at BETWEEN #{startAt} AND #{endAt}
+        </if>
+    </select>
+
+    <select id="realtimeChannelBetsNumber" resultType="long">
+        SELECT COUNT(DISTINCT a.user_id)
+        FROM lms_coin_record a
+        WHERE a.channel_id = #{channelId}
+        <if test="tag != null and tag != ''">
+            AND a.tag = #{tag}
+        </if>
+        <choose>
+            <when test="gameCode == '__legacy__'">AND a.game_code IS NULL</when>
+            <when test="gameCode != null and gameCode != ''">AND a.game_code = #{gameCode}</when>
+        </choose>
+        <if test="startAt != null and startAt != ''">
+            AND a.created_at BETWEEN #{startAt} AND #{endAt}
+        </if>
+    </select>
+
+    <!-- ==================== 定时任务报表 ==================== -->
+
+    <!-- 渠道汇总：按渠道聚合投注/派彩/盈亏 -->
+    <select id="channelSummaryByTag" resultType="java.util.LinkedHashMap">
+        SELECT
+            a.id AS channelId,
+            a.merchant_id AS merchantId,
+            c.game_code AS gameCode,
+            IFNULL(SUM(c.bet), 0) AS bets,
+            IFNULL(SUM(IF(c.pay_out > 0, c.pay_out, 0)), 0) AS payout,
+            IFNULL(SUM(c.pay_out - c.bet), 0) AS playerWl,
+            IFNULL(SUM(c.bet - c.pay_out), 0) AS platformWl
+        FROM mms_channel a
+        LEFT JOIN lms_coin_record c ON a.id = c.channel_id
+        WHERE a.deleted_at IS NULL
+          AND a.id = #{channelId}
+          AND c.expand_time BETWEEN #{startTime} AND #{endTime}
+          AND c.user_id >= 10000
+          AND c.tag = #{tag}
+        GROUP BY a.id, c.game_code
+    </select>
+
+    <!-- 渠道汇总：某一渠道的投注人数 -->
+    <select id="channelBetsNumByTag" resultType="long">
+        SELECT COUNT(DISTINCT a.user_id)
+        FROM lms_coin_record a
+        LEFT JOIN mms_channel c ON c.id = a.channel_id AND c.deleted_at IS NULL
+        WHERE a.expand_time BETWEEN #{startTime} AND #{endTime}
+          AND c.id = #{channelId}
+          AND a.user_id >= 10000
+          AND a.tag = #{tag}
+          AND ((#{gameCode} = '__legacy__' AND a.game_code IS NULL) OR a.game_code = #{gameCode})
+    </select>
+
+    <!-- 商户汇总：按商户聚合投注/派彩/盈亏 -->
+    <select id="merchantSummaryByTag" resultType="java.util.LinkedHashMap">
+        SELECT
+            a.id AS merchantId,
+            IFNULL(SUM(d.bet), 0) AS bets,
+            IFNULL(SUM(IF(d.pay_out > 0, d.pay_out, 0)), 0) AS payout,
+            IFNULL(SUM(d.pay_out - d.bet), 0) AS playerWl,
+            IFNULL(SUM(d.bet - d.pay_out), 0) AS platformWl
+        FROM mms_merchant a
+        LEFT JOIN mms_channel b ON a.id = b.merchant_id AND b.deleted_at IS NULL
+        LEFT JOIN ums_user c ON b.id = c.channel_id
+        LEFT JOIN lms_coin_record d ON c.id = d.user_id
+        WHERE a.deleted_at IS NULL
+          AND d.created_at BETWEEN #{startTime} AND #{endTime}
+          AND d.user_id >= 10000
+          AND d.tag = #{tag}
+        GROUP BY a.id
+    </select>
+
+    <!-- 商户汇总：某一商户的投注人数 -->
+    <select id="merchantBetsNumByTag" resultType="long">
+        SELECT COUNT(DISTINCT a.user_id)
+        FROM lms_coin_record a
+        LEFT JOIN ums_user b ON a.user_id = b.id
+        LEFT JOIN mms_channel c ON b.channel_id = c.id AND c.deleted_at IS NULL
+        LEFT JOIN mms_merchant d ON c.merchant_id = d.id AND d.deleted_at IS NULL
+        WHERE a.created_at BETWEEN #{startTime} AND #{endTime}
+          AND d.id = #{merchantId}
+          AND a.user_id >= 10000
+          AND a.tag = #{tag}
+    </select>
+
+</mapper>

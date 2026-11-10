@@ -1,0 +1,671 @@
+{
+	"textures": [
+		{
+			"image": "PlaneReady.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1936,
+				"h": 384
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "PlaneReady_00.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_01.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 122,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_02.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 243,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_03.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 364,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_04.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 485,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_05.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 606,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_06.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 727,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_07.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 848,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_08.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 969,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_09.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1090,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_10.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1211,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_11.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1332,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_12.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1453,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_13.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1574,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_14.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1695,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_15.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1816,
+						"y": 1,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_16.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_17.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 122,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_18.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 243,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_19.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 364,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_20.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 485,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_21.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 606,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_22.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 727,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_23.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 848,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_24.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 969,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_25.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1090,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_26.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1211,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_27.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1332,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_28.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1453,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_29.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1574,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				},
+				{
+					"filename": "PlaneReady_30.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 119,
+						"h": 190
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 119,
+						"h": 190
+					},
+					"frame": {
+						"x": 1695,
+						"y": 193,
+						"w": 119,
+						"h": 190
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:42cda7544cf92b57d112e76e19f134ac:1d18f55d0ed3dcb93a3af19565ace24e:6adc89c8e62cf5bbcd90519fb78e4bdd$"
+	}
+}

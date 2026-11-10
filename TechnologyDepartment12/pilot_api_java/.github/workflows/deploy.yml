@@ -1,0 +1,140 @@
+name: Build and deploy API
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-pilot-api
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip deploy]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Test and package
+        run: mvn --batch-mode clean verify
+
+      - name: Verify artifact
+        run: test -s target/pilot_api_java-1.0.0.jar
+
+      - name: Validate deployment secrets
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          test -n "$SSH_HOST"
+          test -n "$SSH_KNOWN_HOSTS"
+          test -n "$SSH_PORT"
+          test -n "$SSH_PRIVATE_KEY"
+          test -n "$SSH_USER"
+
+      - name: Configure SSH
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/pilot_deploy
+          chmod 600 ~/.ssh/pilot_deploy
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Upload artifact
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          scp -i ~/.ssh/pilot_deploy -P "$SSH_PORT" \
+            target/pilot_api_java-1.0.0.jar \
+            "$SSH_USER@$SSH_HOST:/tmp/pilot-api-${GITHUB_SHA}.jar"
+
+      - name: Deploy A instance with rollback
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          ssh -i ~/.ssh/pilot_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "bash -s -- '$GITHUB_SHA'" <<'REMOTE'
+          set -euo pipefail
+          version="$1"
+          app_dir=/www/wwwroot/pilot/api
+          deploy_dir=/www/wwwroot/pilot/.deploy/api
+          incoming="/tmp/pilot-api-${version}.jar"
+          jar="$app_dir/pilot_api_java-1.0.0.jar"
+          backup_dir="$deploy_dir/backups/$version"
+          switched=false
+
+          rollback() {
+            status=$?
+            trap - EXIT
+            set +e
+            if [ "$switched" = true ] && [ "$status" -ne 0 ]; then
+              echo "Deployment failed; restoring $backup_dir"
+              "$app_dir/start.sh" stop-a || true
+              cp -a "$backup_dir/pilot_api_java-1.0.0.jar" "$jar"
+              "$app_dir/start.sh" start-a
+            fi
+            rm -f "$incoming"
+            exit "$status"
+          }
+          trap rollback EXIT
+
+          test -s "$incoming"
+          test -s "$jar"
+          test -x "$app_dir/start.sh"
+          rm -rf "$backup_dir"
+          mkdir -p "$backup_dir"
+          cp -a "$jar" "$backup_dir/"
+
+          switched=true
+          "$app_dir/start.sh" stop-a
+          install -m 644 "$incoming" "$jar"
+          "$app_dir/start.sh" start-a
+
+          healthy=false
+          for attempt in $(seq 1 45); do
+            if curl --fail --silent --show-error --max-time 3 \
+              http://127.0.0.1:8880/api/gameSetting >/dev/null; then
+              healthy=true
+              break
+            fi
+            sleep 2
+          done
+          test "$healthy" = true
+          "$app_dir/start.sh" status
+
+          switched=false
+          rm -f "$incoming"
+          find "$deploy_dir/backups" -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' \
+            | sort -nr | tail -n +6 | cut -d' ' -f2- | xargs -r rm -rf --
+          trap - EXIT
+          echo "API A instance deployed: $version"
+          REMOTE

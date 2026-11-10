@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "icon-fly"; /* Project id 3280277 */
+  src: url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAATAAAsAAAAACRQAAARyAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDFAqFUIR7ATYCJAMQCwoABCAFhGcHQBvzByMR5nPRIvtngk2nb4FFIIpjNY9FN2WhjT5ZQBMIz+Mg/LN4ES7CBd8EUT/225MnH/Xk0iwxZDIeNVSNJCiJTCU0SlCr9DeAp6YD2MkOBoJ/cQHEP97ubT+oEk4gggAr0QkEFLXvfpaxmvARZnBAoNAX0k+ll2YkrL+Lw2ljaQJ/ntuYk8aaGKV5511AYy/CLKDAMPc0wvNz1eYKOgcBqpimjWDF+PMHaI68JAIHIuRyAS9SjoIqBWSSDM8gClkYi451cgUE0AuCUwDg0nq//AHyIYMSjLzR2vVkYfNZ3Ge2Zf4/g90D2c3loL0CATBgfGAK2c3WrSN0nOMIqUoiJWISQMQT9TP+M7sUNE61ZDDgP7wMGIqARDKvBth5ri0VXaN5/HhQOD2f2WAsPM+pcwaqgVcAkFWG7ekTUHwZTUW5HfQoKqX+3cDawtnCOiJCWcLcx/qxN6GZapkaRQdVR3kB5pf5DQywIuesOWIkGr6O9ODM5zEylysphpmyhLWhwREHBJ5QgiVDAuq7lBCnOJuMhSAos6lvYKSluZ+ieBDOHCwezhppvqQuzK3LnoKDccUgBrzUrX0+qq9vgHVGB4/gISx0hc3E2GJADIyD16XrWRAYsGEe08JC2BIk9Sfgs3BgLZNnrbB3/XDLCDPk0zA3lAKhsGAsBkbhkAR8IoLCQ3FYEIWB43HNPWTkzN7N/8FHVDTXBW+h64eJScTCuoRStP8Ifxkjvg1emuaAG6mJy/hD0IzRokwztGHCidpEhR+WFlH1S5gkIdPLbr454mDgtUJ33fi4snkbwm+D5h4mx7TXvVft9edM1MEuqnnN8bS8AdOlAbPUPO571PNgl4nakwSa781zCi5DGTSMK3gzWgUuAy5DGsq8Vw70Ql8UoMyvLM28hN0Ez9wFPYUxn7xOmY06T5Sz09MVyD4GHYGOREejefMb/fZxlf3G5kSHNBHoGKkzX6NJjK7iBO+0hdD7gupkleOFu5ga26ye2azIpWVrL3CevmSgV/vEmW4+FaXp1g3CBUDly9TXB1S9v/v/19N3dSed+U/C3T01yqQBehAJoPws6TXpg/fJLFQf/2X3aYGd3ULt2Pu/3HnUX34lqz6Clseka5yVUy2EjEJh2g0j3axGET8LfQPBHWQwLMH/m1B3jFiyK1ClWKAAsqnJvSZEzafCLWSaPVAS3WBkepGOHYVANbMQySxBFWOMJlfTLBIh4jMYlMNAaDAESh23YDQ4QDoWD4E2zyHS4C9UsX9mOt9qj3lgUkIW9Q4bk6JTuWJ1mzm/+6Jq5RX7mej2R1yaFHFvvgx7XigS1zGgrKt9EYeOU8DnpjYj7xNmTi0Zmdci+XyxcEkvmZsU4AEjiiAW0nZQw0giZ4gkyJlJn/d2vpDKiqdwRkFK/kNY0STUjvbMLQsgX3ixUMGBxBdrlX2iaBzU0lkSoOehaYgnZ4JyMqelYEPM1RXs2bkFV8wV5c27F4TdWwEL+dhKS09lUg/5PKmbIol3I+NJMQAAAA==') format('woff2');
+}
+
+.icon-fly {
+  font-family: "icon-fly" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fly-help:before {
+  content: "\e682";
+}
+
+.icon-fly-history:before {
+  content: "\e676";
+}
+
+.icon-fly-clear:before {
+  content: "\e675";
+}
+

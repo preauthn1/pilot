@@ -1,0 +1,50 @@
+{
+  "tips": {
+    "login_timeout": "Nag-time out ang pag-login, mangyaring mag-login muli",
+    "channel_error": "walang channel",
+    "channel_maintenance": "may maintenance ang channel",
+    "get_data_fail": "Nabigong makakuha ng data",
+    "connect_fail": "Nabigo ang koneksyon",
+    "connect_lost": "Nawala ang koneksyon sa network, mangyaring mag-log in muli",
+    "bet_fail": "Nabigong taya, hindi sapat na balanse",
+    "enter_error": "Mali ang room na iyong pinasukan!",
+    "request_fail": "Nabigo ang request",
+    "token_error": "di-wastong token"
+  },
+  "btn": {
+    "confirm": "kumpirmahin",
+    "bet": "bet",
+    "cancel": "Kanselahin",
+    "wait": "hintayin ang susunod na turn",
+    "cash_out": "cash"
+  },
+  "game": {
+    "auto_bet": "awtomatikong pagtaya",
+    "auto_cash_out": "Awtomatikong cash out",
+    "wait": "hintayin ang susunod na turn",
+    "end": "escape",
+    "history": "history ng round",
+    "total_bet": "Kabuuang taya",
+    "previous_round": "nakaraang round",
+    "current_round": "Itong round",
+    "cash_out": "cash",
+    "cash_out_btn": "cash",
+    "multiple": "multiple。",
+    "multiple_btn": "multiple。",
+    "player": "manlalaro",
+    "date": "petsa",
+    "bet": "taya",
+    "game_rule": "mga Patakaran ng laro",
+    "win": "ikaw ang nanalo",
+    "win_multiple": "ano ang iyong cash outlay",
+    "all": "lahat",
+    "mine": "akin",
+    "rank": "pagraranggo",
+    "countdown":"countdown",
+    "start":"simulan",
+    "change_lang":"Pumili ng wika",
+    "confirm":"kumpirmahin"
+  },
+  "rule": "<h1>mga Patakaran ng laro:</h1><p>Ang Rocket Flight ay isang bagong henerasyon ng mga larong iGame. Maaari mong doblehin ang iyong mga kita sa loob lamang ng ilang segundo. Ang mga laro ng Rocket Flight ay binuo sa isang patas na sistema na may mga nabe-verify na resulta, na isang tunay na garantiya ng kredibilidad sa industriya ng gaming ngayon.</p><h2> Ang gameplay ng rocket flight ay napaka-simple.</h2><p>1.Tumaya bago lumipad ang masuwerteng rocket.</p><p>2.Sa pag-alis ng masuwerteng rocket, gayundin ang posibilidad na tumaas ang taya.</p><p>3.Cash Out: Pindutin ang pindutan ng cash out bago mawala ang rocket at manalo ng X beses ng iyong pera!</p>\n<h1>Higit pang mga detalye</h1><p>Ang multiplier ay nagsisimula sa 1x, at kung mas mahaba ang masuwerteng rocket, mas mataas ang posibilidad.</p><p>Ang iyong kita ay kinakalkula sa multiple kapag huminto ka sa paglipad, na na-multiply sa halaga ng iyong taya.</p><p>Ang oras ng paglipad ng Lucky Rocket ay awtomatikong nabuo ng aming supercomputer na i-Game at hindi makokontrol ng mga tao. Ito ay patas at makatarungan. </p>\n<h1>pag-andar ng laro</h1><h2>Pagtaya at paghahagis</h2><p>1. Pumili ng isang halaga, at pagkatapos ay pindutin ang pindutan ng Bet upang pumusta. </p><p>2.Maaari kang maglagay ng dalawang taya sa parehong oras sa pamamagitan ng pagpindot sa icon na plus sa kanang sulok sa itaas ng unang tabla ng pagtaya. </p><p> 3.Pindutin ang Cash Out na buton upang i-cash out ang iyong taya. Kung magkano ang panalo mo ay depende sa iyong stake na na-multiply sa multiplier kapag nag-cash out ka. </p><p> 4.Kung hindi ka mag-cash out bago mawala ang rocket, talo ang iyong taya</p>\n<h2>Auto Bet at Auto Cash Out</h2><p>1. Auto Bet: Pagkatapos i-activate ang function na ito, sa tuwing aalis ang rocket, awtomatikong maglalagay ng taya ang system. </p><p> 2.Awtomatikong exchange: Pagkatapos i-activate ang feature na ito, kapag naabot ng iyong taya ang filled multiplier, awtomatiko itong ma-cash out.</p>\n<h2>Mga Resulta at Istatistika sa Pagtaya</h2><p>1. Sa ilalim ng pahina ng laro, mayroong isang live na panel ng pagtaya. Dito makikita mo ang lahat ng taya ng mga manlalaro para sa kasalukuyang round.</p><p> 2. Sa pahina ng Aking Mga Taya, makikita mo ang lahat ng iyong taya at impormasyon ng panalo at pagkatalo. </p><p>3. Sa page na Ranking, mayroong mga istatistika ng mga resulta ng laro. Maaari mong tingnan ang iyong redemption record at mga leaderboard ng redemption multiplier ng iba pang mga manlalaro.</p>\n<h1 class=\"title\">iba pang tanong</h1><p>1.Kung ang koneksyon sa internet ay naantala habang tumataya, ang laro ay awtomatikong mai-cash out sa kasalukuyang multiplier at ang panalong halaga ay idaragdag sa iyong balanse.</p><p>2.Kung sakaling mabigo ang hardware/software ng laro, mawawalan ng bisa ang mga apektadong taya sa laro at mga payout, at ire-refund ang mga apektadong taya.</p><div style='height:50px;'></div>"
+
+}

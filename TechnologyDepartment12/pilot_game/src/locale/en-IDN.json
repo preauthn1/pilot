@@ -1,0 +1,50 @@
+{
+  "tips": {
+    "login_timeout": "Waktu masuk habis, silakan masuk lagi",
+    "channel_error": "Saluran tidak tersedia",
+    "channel_maintenance": "Maintance",
+    "get_data_fail": "Penerimaan data gagal ",
+    "connect_fail": "Loading gagal",
+    "connect_lost": "Koneksi jaringan terputus, silakan masuk lagi",
+    "bet_fail": "Taruhan gagal, saldo tidak mencukupi",
+    "enter_error": "Salah masuk kamar!",
+    "request_fail": "Permintaan gagal",
+    "token_error": "Token tidak valid"
+  },
+  "btn": {
+    "confirm": "Konfirmasi",
+    "bet": "Taruhan",
+    "cancel": "Batal",
+    "wait": "Tunggu putaran selanjutnya",
+    "cash_out": "Tarik"
+  },
+  "game": {
+    "auto_bet": "Taruh otomatis",
+    "auto_cash_out": "Otomatis tarik",
+    "wait": "Tunggu putaran selanjutnya",
+    "end": "Terjun",
+    "history": "Catatan putaran permainan",
+    "total_bet": "Total taruhan",
+    "previous_round": "putaran sebelumnya",
+    "current_round": "Putaran ini",
+    "cash_out": "Tarik",
+    "cash_out_btn": "Tarik",
+    "multiple": "Perkalian",
+    "multiple_btn": "Perkalian",
+    "player": "Pemain",
+    "date": "Tanggal",
+    "bet": "Taruhan",
+    "game_rule": "Peraturan permainan",
+    "win": "Kamu telah menang",
+    "win_multiple": "Berapa total penarikan kamu ? ",
+    "all": "Semua",
+    "mine": "Punyaku",
+    "rank": "Peringkat",
+    "countdown":"Hitung mundur",
+    "start":"Mulai",
+    "change_lang":"Pilih bahasa",
+    "confirm":"Konfirmasi"
+  },
+  "rule": "<h1>Cara bermain</h1><p>Rocket Flight adalah generasi baru game iGame. Anda dapat menggandakan keuntungan Anda hanya dalam beberapa detik. Game Rocket Flight dibangun di atas sistem yang adil dengan hasil yang dapat diverifikasi, yang merupakan jaminan kredibilitas sejati di industri game saat ini.</p><h2>Gameplay Rocket Flight sangat sederhana :</h2><p>1.  Bertaruh sebelum roket keberuntungan lepas landas.</p><p>2. Saat roket keberuntungan lepas landas, peluang taruhan juga akan meningkat.</p><p>3. Tarik: Sebelum roket menghilang, tekan tombol Tarik dan menangkan berkali lipat uang Anda!</p>\n<h1>Keterangan lebih lanjut</h1><p>Pengganda dimulai dari 1x, dan semakin lama roket keberuntungan terbang, semakin tinggi peluangnya.</p><p>Keuntungan Anda dihitung dengan pengganda saat Anda berhenti terbang, dikalikan dengan jumlah taruhan Anda.</p><p>Waktu penerbangan Lucky Rocket secara otomatis dihasilkan oleh superkomputer i-Game kami dan tidak dapat dikendalikan oleh manusia. Itu adil dan terbuka.</p>\n<h1>Fitur permainan</h1><h2>Taruhan dan Tarik</h2><p>1. Pilih atau isi jumlah dan tekan tombol Taruhan untuk memasang taruhan.</p><p>2. Dengan menekan ikon plus di sudut kanan atas papan taruhan pertama, Anda dapat memasang dua taruhan sekaligus.</p><p> 3. Tekan tombol  Tarik  untuk mencairkan taruhan Anda. Berapa banyak Anda menang tergantung pada taruhan Anda dikalikan dengan pengganda saat Anda menarik.</p><p> 4. Jika Anda tidak menarik sebelum roket menghilang, taruhan Anda hilang.</p>\n<h2>Taruhan Otomatis dan Penarikan Otomatis</h2><p>1. Taruhan otomatis : Setelah mengaktifkan fungsi ini, sistem akan otomatis bertaruh setiap kali roket lepas landas. </p><p> 2. Penarikan Otomatis : Setelah mengaktifkan fungsi ini, ketika taruhan Anda mencapai kelipatan yang terisi, itu akan diuangkan secara otomatis.</p>\n<h2>Hasil Taruhan dan Statistik</h2><p>1. Di bawah halaman permainan, ada panel taruhan langsung. Di sini Anda dapat melihat taruhan semua pemain untuk putaran saat ini.</p><p>2. Pada halaman Taruhan Saya, Anda dapat melihat semua taruhan Anda dan informasi menang dan kalah.</p><p>3. Di halaman Peringkat, ada statistik hasil pertandingan. Anda dapat melihat catatan penukaran Anda dan papan peringkat pengganda penukaran pemain lain.</p>\n<h1 class=\"title\">Kendala lain</h1><p>1. Jika koneksi internet terputus saat bertaruh, permainan akan secara otomatis diuangkan pada pengganda saat ini dan jumlah kemenangan akan ditambahkan ke saldo Anda.</p><p>2. Jika terjadi kegagalan perangkat keras/perangkat lunak game, taruhan dan pembayaran game yang terpengaruh akan dibatalkan, dan taruhan yang terpengaruh akan dikembalikan.</p><div style='height:50px;'></div>"
+
+}

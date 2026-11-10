@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pilot API 接口文档</title>
+<style>
+:root {
+  --bg: #0b1120; --card: #111827; --card2: #1a2332; --border: #1e293b;
+  --text: #e2e8f0; --muted: #94a3b8; --primary: #3b82f6; --primary2: #1d4ed8;
+  --green: #22c55e; --amber: #f59e0b; --red: #ef4444; --purple: #a78bfa;
+  --radius: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Top Bar */
+.topbar { position: sticky; top: 0; z-index: 10; background: rgba(11,17,32,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+.topbar h1 { font-size: 18px; font-weight: 700; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.topbar .meta { font-size: 13px; color: var(--muted); display: flex; gap: 16px; }
+
+/* Layout */
+.layout { display: flex; height: calc(100vh - 58px); }
+.sidebar { width: 280px; border-right: 1px solid var(--border); overflow-y: auto; padding: 12px 0; flex-shrink: 0; }
+.main { flex: 1; overflow-y: auto; padding: 32px 40px; }
+
+/* Sidebar */
+.tag-group { margin-bottom: 4px; }
+.tag-toggle { display: flex; align-items: center; gap: 8px; padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text); border: none; background: none; width: 100%; text-align: left; transition: .15s; }
+.tag-toggle:hover { background: rgba(59,130,246,.08); }
+.tag-toggle .arrow { font-size: 10px; transition: .2s; color: var(--muted); }
+.tag-toggle .arrow.open { transform: rotate(90deg); }
+.tag-ops { display: none; }
+.tag-ops.open { display: block; }
+.op-item { display: flex; align-items: center; gap: 8px; padding: 7px 20px 7px 36px; cursor: pointer; font-size: 13px; color: var(--muted); border: none; background: none; width: 100%; text-align: left; transition: .15s; }
+.op-item:hover { color: var(--text); background: rgba(59,130,246,.06); }
+.op-item.active { color: var(--primary); background: rgba(59,130,246,.1); border-right: 2px solid var(--primary); }
+.method-badge { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 11px; font-weight: 700; min-width: 38px; text-align: center; }
+.method-get { background: rgba(34,197,94,.15); color: var(--green); }
+.method-post { background: rgba(245,158,11,.15); color: var(--amber); }
+.method-put { background: rgba(59,130,246,.15); color: var(--primary); }
+.method-delete { background: rgba(239,68,68,.15); color: var(--red); }
+
+/* Main Content */
+.endpoint-header { margin-bottom: 24px; }
+.endpoint-header h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.endpoint-header .path-line { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.endpoint-header .path { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 17px; color: var(--primary); }
+.endpoint-header .desc { color: var(--muted); font-size: 15px; margin-top: 8px; }
+
+.section { margin-bottom: 28px; }
+.section h3 { font-size: 14px; font-weight: 700; letter-spacing: .5px; color: var(--muted); margin-bottom: 12px; }
+
+/* Request Body - 表格行布局 */
+.property { display: flex; background: var(--card); border: 1px solid var(--border); overflow: hidden; }
+.property + .property { border-top: none; }
+.property:first-of-type { border-radius: var(--radius) var(--radius) 0 0; }
+.property:last-of-type { border-radius: 0 0 var(--radius) var(--radius); }
+.property:only-of-type { border-radius: var(--radius); }
+.prop-name { width: 280px; padding: 14px 18px; font-family: 'SF Mono', 'Consolas', monospace; font-size: 13px; font-weight: 600; color: var(--text); background: var(--card2); flex-shrink: 0; display: flex; align-items: center; gap: 8px; }
+.prop-type { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.type-string { background: rgba(34,197,94,.12); color: var(--green); }
+.type-number { background: rgba(59,130,246,.12); color: var(--primary); }
+.type-boolean { background: rgba(245,158,11,.12); color: var(--amber); }
+.type-obj { background: rgba(168,85,247,.12); color: var(--purple); }
+.type-array { background: rgba(239,68,68,.12); color: var(--red); }
+.prop-info { flex: 1; padding: 14px 18px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+.prop-info .required { color: var(--red); font-size: 11px; font-weight: 700; margin-left: 8px; }
+.prop-example { display: inline-block; margin-top: 4px; font-family: 'SF Mono', monospace; font-size: 12px; color: var(--primary); }
+.prop-example::before { content: '示例: '; color: var(--muted); font-family: -apple-system, sans-serif; font-size: 11px; }
+
+.params-table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.params-table th { text-align: left; padding: 10px 14px; font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; background: var(--card2); }
+.params-table td { padding: 10px 14px; font-size: 13px; border-top: 1px solid var(--border); color: var(--muted); }
+.params-table td:first-child { font-family: 'SF Mono', monospace; color: var(--text); font-weight: 600; }
+
+/* Try It */
+.try-block { margin-top: 32px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.try-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--card2); border-bottom: 1px solid var(--border); }
+.try-bar h3 { font-size: 14px; font-weight: 600; }
+.try-body { padding: 18px; display: none; }
+.try-body.open { display: block; }
+.try-body textarea { width: 100%; min-height: 140px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'SF Mono', 'Consolas', monospace; font-size: 13px; padding: 14px; resize: vertical; }
+.try-body textarea:focus { outline: none; border-color: var(--primary); }
+.try-row { display: flex; gap: 12px; margin-top: 12px; align-items: flex-start; }
+.btn { padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: .2s; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary2); }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+.btn-outline:hover { border-color: var(--primary); }
+.response-box { flex: 1; min-height: 140px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-family: 'SF Mono', 'Consolas', monospace; font-size: 12px; color: var(--muted); white-space: pre-wrap; overflow-x: auto; max-height: 400px; overflow-y: auto; }
+.response-box.error { color: var(--red); }
+.response-box.success { color: var(--green); }
+
+/* Welcome */
+.welcome { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--muted); text-align: center; }
+.welcome h2 { font-size: 24px; color: var(--text); margin-bottom: 8px; }
+.welcome .tip { font-size: 15px; margin-bottom: 24px; }
+.welcome .quick-links { display: flex; gap: 12px; }
+.quick-link { padding: 10px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--text); text-decoration: none; transition: .2s; }
+.quick-link:hover { border-color: var(--primary); color: var(--primary); }
+
+.error-page { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80vh; color: var(--muted); gap: 12px; }
+.error-page h2 { color: var(--red); font-size: 20px; }
+.loading-page { display: flex; align-items: center; justify-content: center; height: 80vh; color: var(--muted); font-size: 16px; gap: 10px; }
+.spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin .6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div id="app"><div class="loading-page"><div class="spinner"></div>正在加载接口文档...</div></div>
+
+<script>
+(function() {
+  var app = document.getElementById('app');
+  var spec = null;
+  var activeTag = null;
+  var activeOp = null;
+
+  function h(tag, attrs, children) {
+    var el = document.createElement(tag);
+    if (attrs) Object.entries(attrs).forEach(function(e) {
+      if (e[0] === 'className') el.className = e[1];
+      else if (e[0] === 'textContent') el.textContent = e[1];
+      else if (e[0] === 'innerHTML') el.innerHTML = e[1];
+      else if (e[0] === 'onclick') el.addEventListener('click', e[1]);
+      else el.setAttribute(e[0], e[1]);
+    });
+    if (children) {
+      if (Array.isArray(children)) children.forEach(function(c) { if (c) el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+      else if (typeof children === 'string') el.textContent = children;
+      else el.appendChild(children);
+    }
+    return el;
+  }
+
+  function methodClass(m) { return 'method-' + (m || 'get').toLowerCase(); }
+  function typeClass(t) {
+    if (!t) return 'type-string';
+    t = t.toLowerCase();
+    if (t === 'integer' || t === 'number' || t === 'int' || t === 'long' || t === 'float' || t === 'double') return 'type-number';
+    if (t === 'boolean' || t === 'bool') return 'type-boolean';
+    if (t === 'array') return 'type-array';
+    if (t === 'object') return 'type-obj';
+    return 'type-string';
+  }
+
+  function getTypeLabel(schema) {
+    if (!schema) return 'string';
+    if (schema.$ref) return schema.$ref.split('/').pop();
+    if (schema.type === 'array' && schema.items) return 'array<' + getTypeLabel(schema.items) + '>';
+    if (schema.type === 'integer') return 'integer';
+    if (schema.type === 'number') return 'number';
+    if (schema.type === 'boolean') return 'boolean';
+    if (schema.type === 'object') return 'object';
+    return schema.type || 'string';
+  }
+
+  function renderProperty(name, schema, required) {
+    var type = getTypeLabel(schema);
+    var desc = schema.description || '';
+    var exam = schema.example !== undefined ? String(schema.example) : '';
+
+    return h('div', { className: 'property' }, [
+      h('div', { className: 'prop-name' }, [
+        document.createTextNode(name),
+        h('span', { className: 'prop-type ' + typeClass(type), textContent: type }),
+        required
+          ? h('span', { className: 'required', textContent: '必填' })
+          : h('span', { className: 'required', style: 'background:rgba(148,163,184,.1);color:var(--muted)', textContent: '可选' })
+      ]),
+      h('div', { className: 'prop-info' }, [
+        desc ? document.createTextNode(desc) : null,
+        exam ? h('span', { className: 'prop-example', textContent: exam }) : null
+      ])
+    ]);
+  }
+
+  function renderParams(parameters, reqBody, pathParams) {
+    var frag = document.createDocumentFragment();
+
+    if (parameters && parameters.length > 0) {
+      frag.appendChild(h('div', { className: 'section' }, [
+        h('h3', { textContent: 'Query 参数' }),
+        h('table', { className: 'params-table' }, [
+          h('thead', null, h('tr', null, [
+            h('th', { textContent: '参数' }),
+            h('th', { textContent: '类型' }),
+            h('th', { textContent: '必填' }),
+            h('th', { textContent: '说明' })
+          ])),
+          h('tbody', null, parameters.map(function(p) {
+            return h('tr', null, [
+              h('td', { textContent: p.name }),
+              h('td', { textContent: (p.schema ? getTypeLabel(p.schema) : 'string') }),
+              h('td', { textContent: p.required ? '是' : '否' }),
+              h('td', { textContent: p.description || '' })
+            ]);
+          }))
+        ])
+      ]));
+    }
+
+    if (pathParams && pathParams.length > 0) {
+      frag.appendChild(h('div', { className: 'section' }, [
+        h('h3', { textContent: '路径参数' }),
+        h('table', { className: 'params-table' }, [
+          h('thead', null, h('tr', null, [
+            h('th', { textContent: '参数' }),
+            h('th', { textContent: '类型' }),
+            h('th', { textContent: '说明' })
+          ])),
+          h('tbody', null, pathParams.map(function(p) {
+            return h('tr', null, [
+              h('td', { textContent: p.name }),
+              h('td', { textContent: (p.schema ? getTypeLabel(p.schema) : 'string') }),
+              h('td', { textContent: p.description || '' })
+            ]);
+          }))
+        ])
+      ]));
+    }
+
+    if (reqBody) {
+      var content = (reqBody.content || {})['application/json'];
+      var schema = content && content.schema;
+      if (schema) {
+        if (schema.$ref) {
+          var refName = schema.$ref.split('/').pop();
+          var resolved = ((spec.components || {}).schemas || {})[refName];
+          if (resolved) schema = resolved;
+        }
+        var props = schema.properties || {};
+        var requiredFields = schema.required || [];
+        var entries = Object.entries(props);
+        if (entries.length > 0) {
+          frag.appendChild(h('div', { className: 'section' }, [
+            h('h3', { textContent: '请求体' }),
+            h('div', null, entries.map(function(e) {
+              return renderProperty(e[0], e[1], requiredFields.indexOf(e[0]) >= 0);
+            }))
+          ]));
+        }
+      }
+    }
+
+    return frag;
+  }
+
+  function renderResponse(responses) {
+    if (!responses) return null;
+    var frag = document.createDocumentFragment();
+    Object.entries(responses).forEach(function(e) {
+      var code = e[0];
+      var resp = e[1];
+      var desc = resp.description || '';
+      frag.appendChild(h('div', { className: 'section' }, [
+        h('h3', { textContent: '响应 ' + code }),
+        h('div', { className: 'property' }, [
+          h('div', { className: 'prop-name' }, h('span', { className: 'prop-type ' + (code === '200' ? 'type-string' : 'type-number'), textContent: code })),
+          h('div', { className: 'prop-info', textContent: desc })
+        ])
+      ]));
+    });
+    return frag;
+  }
+
+  function generateExampleBody(op) {
+    var reqBody = op.requestBody;
+    if (!reqBody) return '{}';
+    var content = (reqBody.content || {})['application/json'];
+    var schema = content && content.schema;
+    if (!schema) return '{}';
+    if (schema.$ref) {
+      var refName = schema.$ref.split('/').pop();
+      var resolved = ((spec.components || {}).schemas || {})[refName];
+      if (resolved) schema = resolved;
+    }
+    var props = schema.properties || {};
+    var obj = {};
+    Object.entries(props).forEach(function(e) {
+      var key = e[0];
+      var prop = e[1];
+      if (prop.example !== undefined) { obj[key] = prop.example; }
+      else if (prop.type === 'integer' || prop.type === 'number') { obj[key] = 0; }
+      else if (prop.type === 'boolean') { obj[key] = false; }
+      else if (prop.type === 'array') { obj[key] = []; }
+      else { obj[key] = 'string'; }
+    });
+    return JSON.stringify(obj, null, 2);
+  }
+
+  function selectOp(opId) {
+    activeOp = opId;
+    if (!spec) return;
+    var op = null;
+    var opPath = '';
+    var opMethod = '';
+
+    for (var path in spec.paths) {
+      var methods = spec.paths[path];
+      for (var m in methods) {
+        if (methods[m].operationId === opId) {
+          op = methods[m];
+          opPath = path;
+          opMethod = m.toUpperCase();
+          break;
+        }
+      }
+      if (op) break;
+    }
+
+    // Update sidebar
+    document.querySelectorAll('.op-item').forEach(function(el) {
+      el.classList.toggle('active', el.getAttribute('data-op') === opId);
+    });
+
+    if (!op) return;
+
+    var main = document.querySelector('.main');
+    main.innerHTML = '';
+
+    // header
+    main.appendChild(h('div', { className: 'endpoint-header' }, [
+      h('h2', { textContent: (op.summary || op.operationId || '') }),
+      h('div', { className: 'path-line' }, [
+        h('span', { className: 'method-badge ' + methodClass(opMethod), textContent: opMethod }),
+        h('span', { className: 'path', textContent: opPath })
+      ]),
+      op.description ? h('div', { className: 'desc', textContent: op.description }) : null
+    ]));
+
+    // 免费下注接口：显示签名说明
+    if (op.tags && op.tags.indexOf('免费下注') >= 0) {
+      main.appendChild(h('div', { className: 'section', style: 'background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.15);border-radius:10px;padding:18px 22px' }, [
+        h('h3', { style: 'color:var(--primary);font-size:14px;font-weight:700', textContent: '🔐 签名算法（MD5）' }),
+        h('ol', { style: 'padding-left:20px;color:var(--muted);font-size:13px;line-height:2.2' }, [
+          h('li', null, ['将除 ', h('code', { style: 'background:rgba(59,130,246,.1);padding:1px 6px;border-radius:3px;color:var(--primary)', textContent: 'sign' }), ' 外的所有参数按 key 字母序排列']),
+          h('li', null, ['拼接为 ', h('code', { style: 'background:rgba(59,130,246,.1);padding:1px 6px;border-radius:3px;color:var(--primary)', textContent: 'key=value&key=value' }), ' 格式（过滤 null 值）']),
+          h('li', null, ['末尾追加 ', h('code', { style: 'background:rgba(59,130,246,.1);padding:1px 6px;border-radius:3px;color:var(--primary)', textContent: 'key=密钥' }), '（密钥从平台获取）']),
+          h('li', null, ['对整串做 ', h('strong', { textContent: 'MD5 小写' })])
+        ]),
+        h('p', { style: 'font-size:12px;color:var(--muted);margin-top:8px;background:rgba(59,130,246,.06);padding:8px 12px;border-radius:6px', textContent: '⚠ 所有参数 key 必须为小写驼峰，expireAt 格式 yyyy-MM-dd HH:mm:ss（username channel count activityId sourceOrderId expireAt timestamp）' })
+      ]));
+    }
+
+    // parameters
+    var pathParams = (op.parameters || []).filter(function(p) { return p.in === 'path'; });
+    var queryParams = (op.parameters || []).filter(function(p) { return p.in === 'query'; });
+    main.appendChild(renderParams(queryParams, op.requestBody, pathParams));
+
+    // responses
+    if (op.responses) {
+      main.appendChild(h('div', { className: 'section' }, [
+        h('h3', { textContent: '响应' }),
+        h('div', null, Object.entries(op.responses).map(function(e) {
+          var code = e[0];
+          var resp = e[1];
+          var desc = resp.description || '';
+          var statusText = code === '200' ? '成功' : code === '201' ? '已创建' : code === '400' ? '参数错误' : code === '401' ? '未认证' : code === '403' ? '无权限' : code === '404' ? '未找到' : code === '500' ? '服务器错误' : '';
+          return h('div', { className: 'property' }, [
+            h('div', { className: 'prop-name' }, [
+              h('span', { className: 'prop-type ' + (code === '200' ? 'type-string' : 'type-number'), textContent: code }),
+              statusText ? document.createTextNode(' ' + statusText) : null
+            ]),
+            h('div', { className: 'prop-info', textContent: desc })
+          ]);
+        }))
+      ]));
+    }
+
+    // try it
+    var exampleBody = generateExampleBody(op);
+    var tryId = 'try-' + opId;
+
+    var tryBlock = h('div', { className: 'try-block' });
+    tryBlock.innerHTML = '';
+    tryBlock.appendChild(h('div', { className: 'try-bar' }, [
+      h('h3', { textContent: '💻 在线调试' }),
+      h('button', { className: 'btn btn-outline', textContent: '展开', onclick: function() {
+        var body = tryBlock.querySelector('.try-body');
+        var btn = tryBlock.querySelector('.try-bar .btn');
+        var isOpen = body.classList.toggle('open');
+        btn.textContent = isOpen ? '收起' : '展开';
+      }})
+    ]));
+
+    var tryBody = h('div', { className: 'try-body' });
+    var requestUrl = window.location.origin + opPath;
+
+    tryBody.appendChild(h('div', { className: 'section' }, [
+      h('h3', { textContent: '请求地址: ' + requestUrl }),
+      opMethod !== 'GET' ? h('textarea', { textContent: exampleBody, id: tryId + '-body' }, null) : null
+    ]));
+
+    var respBox = h('div', { className: 'response-box', id: tryId + '-resp', textContent: '点击发送后这里显示响应...' });
+    tryBody.appendChild(h('div', { className: 'try-row' }, [
+      h('button', { className: 'btn btn-primary', textContent: '发送请求', onclick: function() {
+        var respEl = document.getElementById(tryId + '-resp');
+        respEl.textContent = '请求中...';
+        respEl.className = 'response-box';
+
+        var fetchOpts = { method: opMethod, headers: { 'Content-Type': 'application/json' } };
+        if (opMethod !== 'GET') {
+          try { fetchOpts.body = document.getElementById(tryId + '-body').value; } catch(e) {}
+        }
+        fetch(requestUrl, fetchOpts)
+          .then(function(r) { return r.text().then(function(t) { return { status: r.status, body: t }; }); })
+          .then(function(r) {
+            try {
+              var parsed = JSON.parse(r.body);
+              respEl.textContent = JSON.stringify(parsed, null, 2);
+            } catch(e) {
+              respEl.textContent = r.body;
+            }
+            respEl.className = 'response-box ' + (r.status >= 200 && r.status < 300 ? 'success' : 'error');
+          })
+          .catch(function(err) {
+            respEl.textContent = '请求失败: ' + err.message;
+            respEl.className = 'response-box error';
+          });
+      }}),
+      respBox
+    ]));
+
+    tryBlock.appendChild(tryBody);
+    main.appendChild(tryBlock);
+  }
+
+  function renderSidebar(tags) {
+    var sidebar = document.querySelector('.sidebar');
+    sidebar.innerHTML = '';
+
+    tags.forEach(function(tag) {
+      var group = h('div', { className: 'tag-group' });
+      var opsDiv = h('div', { className: 'tag-ops' });
+
+      group.appendChild(h('button', { className: 'tag-toggle', onclick: function() {
+        var arrow = group.querySelector('.arrow');
+        var ops = group.querySelector('.tag-ops');
+        var isOpen = ops.classList.toggle('open');
+        arrow.classList.toggle('open', isOpen);
+        arrow.textContent = isOpen ? '▶' : '▸';
+      }}, [
+        h('span', { className: 'arrow', textContent: '▸' }),
+        document.createTextNode(tag.name || '未分类'),
+        h('span', { style: 'font-size:11px;color:var(--muted);margin-left:auto', textContent: tag.ops.length })
+      ]));
+
+      tag.ops.forEach(function(op) {
+        opsDiv.appendChild(h('button', {
+          className: 'op-item',
+          'data-op': op.operationId,
+          onclick: function() { selectOp(op.operationId); }
+        }, [
+          h('span', { className: 'method-badge ' + methodClass(op.method), textContent: op.method.toUpperCase() }),
+          document.createTextNode(op.path)
+        ]));
+      });
+
+      group.appendChild(opsDiv);
+      sidebar.appendChild(group);
+    });
+  }
+
+  function build(s) {
+    spec = s;
+    if (!spec || !spec.paths) {
+      app.innerHTML = '<div class="error-page"><h2>加载失败</h2><p>无法解析 OpenAPI 文档</p></div>';
+      return;
+    }
+
+    // Collect tags
+    var tagMap = {};
+    for (var path in spec.paths) {
+      var ops = spec.paths[path];
+      for (var method in ops) {
+        var op = ops[method];
+        var tagName = (op.tags && op.tags[0]) || '未分类';
+        if (!tagMap[tagName]) tagMap[tagName] = [];
+        tagMap[tagName].push({ method: method, path: path, operationId: op.operationId, summary: op.summary });
+      }
+    }
+
+    var tags = Object.entries(tagMap).map(function(e) { return { name: e[0], ops: e[1] }; });
+
+    app.innerHTML = '';
+
+    // Topbar
+    app.appendChild(h('div', { className: 'topbar' }, [
+      h('h1', { textContent: (spec.info && spec.info.title) || 'API 接口文档' }),
+      h('div', { className: 'meta' }, [
+        h('span', { textContent: 'v' + ((spec.info && spec.info.version) || '1.0') }),
+        h('span', { textContent: Object.keys(spec.paths).length + ' 个接口' })
+      ])
+    ]));
+
+    // Layout
+    var layout = h('div', { className: 'layout' });
+    layout.appendChild(h('div', { className: 'sidebar' }));
+    layout.appendChild(h('div', { className: 'main' }, h('div', { className: 'welcome' }, [
+      h('h2', { textContent: 'Pilot 游戏平台 API' }),
+      h('div', { className: 'tip', textContent: '从左侧选择一个接口开始查看' }),
+      h('div', { className: 'quick-links' }, [
+        h('a', { className: 'quick-link', href: '/docs.html', textContent: '返回导航页' }),
+        h('a', { className: 'quick-link', href: '/pilot_api.postman_collection.json', textContent: '下载 Postman 集合' })
+      ])
+    ])));
+    app.appendChild(layout);
+
+    renderSidebar(tags);
+  }
+
+  // Fetch spec
+  fetch('/v1/api-docs', { credentials: 'same-origin' })
+    .then(function(r) { return r.json(); })
+    .then(function(data) { build(data); })
+    .catch(function(err) {
+      app.innerHTML = '<div class="error-page"><h2>加载失败</h2><p>无法获取 OpenAPI 文档，请确认服务已启动</p><p style="font-size:13px">' + err.message + '</p><a href="/docs.html" style="color:var(--primary);margin-top:12px">返回导航页</a></div>';
+    });
+})();
+</script>
+</body>
+</html>

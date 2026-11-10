@@ -1,0 +1,50 @@
+{
+  "tips": {
+    "login_timeout": "Log masuk tamat masa, sila log masuk semula",
+    "channel_error": "saluran tidak wujud",
+    "channel_maintenance": "penyelenggaraan saluran",
+    "get_data_fail": "Gagal mendapatkan data",
+    "connect_fail": "Sambungan telah gagal",
+    "connect_lost": "Sambungan rangkaian terputus, sila log masuk semula",
+    "bet_fail": "Gagal pertaruhan, baki tidak mencukupi",
+    "enter_error": "Silap masuk bilik!",
+    "request_fail": "Permintaan gagal",
+    "token_error": "Token tidak sah"
+  },
+  "btn": {
+    "confirm": "mengesahkan",
+    "bet": "BET",
+    "cancel": "Batal",
+    "wait": "tunggu giliran seterusnya",
+    "cash_out": "CASH OUT"
+  },
+  "game": {
+    "auto_bet": "Auto Bet",
+    "auto_cash_out": "Auto Cash Out",
+    "wait": "keluar tunggu giliran seterusnya",
+    "end": "payung terjun",
+    "history": "sejarah bulat",
+    "total_bet": "Jumlah pertaruhan",
+    "previous_round": "pusingan sebelumnya",
+    "current_round": "Pusingan ini",
+    "cash_out": "CASH OUT",
+    "cash_out_btn": "CASH OUT",
+    "multiple": "ramai.",
+    "multiple_btn": "ramai.",
+    "player": "pemain",
+    "date": "Tarikh",
+    "bet": "Pertaruhan",
+    "game_rule": "Peraturan Permainan",
+    "win": "awak menang",
+    "win_multiple": "berapakah perbelanjaan tunai anda",
+    "all": "semua",
+    "mine": "saya",
+    "rank": "ranking",
+    "countdown":"kira detik",
+    "start":"mulakan",
+    "change_lang":"Pilih bahasa",
+    "confirm":"mengesahkan"
+  },
+  "rule": "<h1>Peraturan Permainan:</h1><p>Penerbangan Roket ialah generasi baru permainan iGame. U blh menggandakan keuntungan u dlm beberapa saat saja. Permainan Rocket Flight dibina di atas sistem yg adil dengan hasil yang boleh disahkan, yg merupakan jaminan sebenar kredibiliti dlm industri permainan hari ini. </p><h2>Permainan penerbangan roket adalah sgt mudah:</h2><p>1. Pertaruhan sblm roket bertuah berlepas.</p><p>2. Apbl roket bertuah berlepas, kemungkinan pertaruhan jg akan meningkat. </p><p>3. Tunai Keluar: Sblm roket hilang, tekan butang keluar tunai & menang X kali ganda wang anda! </p>\n<h1>Maklumat lanjut </h1><p>Pengganda bermula pd 1x & semakin lama roket bertuah terbang, semakin tinggi kemungkinannya. </p><p>Keuntungan u dikira dgn pengganda apbl u berhenti terbang, didarab dgn jumlah pertaruhan u. </p><p>Masa penerbangan Lucky Rocket dijana secara automatik oleh superkomputer i-Game kami & tak blh dikawal oleh manusia. Ia adil & saksama.  </p>\n<h1>Ciri2 permainan </h1><h2>Pertaruhan & Tunai keluar</h2><p>1. Pilih atau isikan jumlah & tekan butang 'Pertaruhan' utk membuat pertaruhan.’</p><p>2. Dgn menekan ikon tambah di sudut kanan atau papan pertaruhan pertama, u blh meletakkan dua pertaruhan pd masa yg sama. </p><p>3. Tekan butang 'Cash Out' utk tunaikan pertaruhan u. Jumlah yg u menang bergantung pd pegangan u didarab dgn pengganda apbl u mengeluarkan wang. </p><p> 4. Jika anda tdk mengeluarkan wang sblm roket hilang, taruhan u hilang. </p>\n<h2>Auto Bet & Auto Tunai Keluar</h2><p>1. Auto Bet: Slp mengaktifkan fungsi ini, sistem akan bertaruh secara automatik setiap kali roket berlepas. </p><p> 2. Berhenti terbang secara automatik: Selepas mengaktifkan fungsi ini, apbl pertaruhan u mencapai berbilang yg diisi, ia akan dikeluarkan secara automatik.</p>\n<h2>Keputusan & Statistik Pertaruhan</h2><p>1. Di bawah halaman permainan, terdapat panel pertaruhan langsung. Di sini u blh melihat semua pertaruhan pemain utk pusingan semasa. </p><p>2. Pada halaman 'Pertaruhan Saya', u blh melihat semua pertaruhan u & maklumat menang & kalah. </p><p>3. Dlm halaman 'Kedudukan', terdpt statistik keputusan permainan. U blh melihat rekod penebusan u & papan pendahulu pengganda penebusan pemain lain. </p>\n<h1 class=\"title\">Masalah lain</h1><p>1. Jika sambungan internet terganggu semasa membuat pertaruhan, permainan akan dikeluarkan secara automatik pd pengganda semasa & jumlah kemenangan akan ditambah ke baki u. </p><p>2. Sekiranya berlaku kegagalan perkakasan/perisian permainan, pertaruhan & pembayaran permainan yang terjejas akan terbatal, & pertaruhan yg terjejas akan dikembalikan.</p><div style='height:50px;'></div>"
+
+}

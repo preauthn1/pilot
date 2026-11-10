@@ -1,0 +1,37 @@
+# 开发环境配置
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/game_pilot?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Kolkata
+#    url: jdbc:mysql://103.41.19.169:3306/game_pilot?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Kolkata
+    username: root
+    password: root
+#    username: game_pilot
+#    password: WEmYhzFJ5ZtDhdYi
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 3
+      timeout: 5000ms
+
+# IP 白名单（开发环境关闭）
+ip:
+  whitelist:
+    enabled: true
+
+logging:
+  level:
+    com.politapi: debug
+
+# 游戏服控制HTTP地址（gameserver config/http.js 中的 host:port）
+game:
+  control:
+    url: http://127.0.0.1:9000
+#    url: http://wsspolt.99ads.vip:9000
+    key: 5dfa8c73449f6299

@@ -1,0 +1,461 @@
+{
+	"textures": [
+		{
+			"image": "PlaneBoom.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 933,
+				"h": 1155
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "PlaneBoom_03.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 234,
+						"h": 234
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 234,
+						"h": 234
+					}
+				},
+				{
+					"filename": "PlaneBoom_04.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 234,
+						"h": 233
+					},
+					"frame": {
+						"x": 1,
+						"y": 237,
+						"w": 234,
+						"h": 233
+					}
+				},
+				{
+					"filename": "PlaneBoom_06.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 234,
+						"h": 233
+					},
+					"frame": {
+						"x": 1,
+						"y": 472,
+						"w": 234,
+						"h": 233
+					}
+				},
+				{
+					"filename": "PlaneBoom_07.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 233,
+						"h": 234
+					},
+					"frame": {
+						"x": 1,
+						"y": 707,
+						"w": 233,
+						"h": 234
+					}
+				},
+				{
+					"filename": "PlaneBoom_08.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 233,
+						"h": 232
+					},
+					"frame": {
+						"x": 236,
+						"y": 707,
+						"w": 233,
+						"h": 232
+					}
+				},
+				{
+					"filename": "PlaneBoom_05.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 232,
+						"h": 232
+					},
+					"frame": {
+						"x": 237,
+						"y": 1,
+						"w": 232,
+						"h": 232
+					}
+				},
+				{
+					"filename": "PlaneBoom_10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 232,
+						"h": 230
+					},
+					"frame": {
+						"x": 237,
+						"y": 235,
+						"w": 232,
+						"h": 230
+					}
+				},
+				{
+					"filename": "PlaneBoom_11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 231,
+						"h": 230
+					},
+					"frame": {
+						"x": 237,
+						"y": 467,
+						"w": 231,
+						"h": 230
+					}
+				},
+				{
+					"filename": "PlaneBoom_12.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 231,
+						"h": 229
+					},
+					"frame": {
+						"x": 470,
+						"y": 467,
+						"w": 231,
+						"h": 229
+					}
+				},
+				{
+					"filename": "PlaneBoom_09.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 230,
+						"h": 230
+					},
+					"frame": {
+						"x": 471,
+						"y": 698,
+						"w": 230,
+						"h": 230
+					}
+				},
+				{
+					"filename": "PlaneBoom_00.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 3,
+						"h": 3
+					},
+					"frame": {
+						"x": 237,
+						"y": 699,
+						"w": 3,
+						"h": 3
+					}
+				},
+				{
+					"filename": "PlaneBoom_14.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 230,
+						"h": 230
+					},
+					"frame": {
+						"x": 471,
+						"y": 1,
+						"w": 230,
+						"h": 230
+					}
+				},
+				{
+					"filename": "PlaneBoom_13.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 3,
+						"w": 230,
+						"h": 227
+					},
+					"frame": {
+						"x": 471,
+						"y": 233,
+						"w": 230,
+						"h": 227
+					}
+				},
+				{
+					"filename": "PlaneBoom_17.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 5,
+						"w": 228,
+						"h": 224
+					},
+					"frame": {
+						"x": 471,
+						"y": 930,
+						"w": 228,
+						"h": 224
+					}
+				},
+				{
+					"filename": "PlaneBoom_19.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 5,
+						"w": 227,
+						"h": 224
+					},
+					"frame": {
+						"x": 701,
+						"y": 930,
+						"w": 227,
+						"h": 224
+					}
+				},
+				{
+					"filename": "PlaneBoom_02.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 23,
+						"y": 23,
+						"w": 188,
+						"h": 187
+					},
+					"frame": {
+						"x": 236,
+						"y": 941,
+						"w": 188,
+						"h": 187
+					}
+				},
+				{
+					"filename": "PlaneBoom_01.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 49,
+						"y": 48,
+						"w": 135,
+						"h": 135
+					},
+					"frame": {
+						"x": 1,
+						"y": 943,
+						"w": 135,
+						"h": 135
+					}
+				},
+				{
+					"filename": "PlaneBoom_15.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 4,
+						"w": 229,
+						"h": 228
+					},
+					"frame": {
+						"x": 703,
+						"y": 1,
+						"w": 229,
+						"h": 228
+					}
+				},
+				{
+					"filename": "PlaneBoom_18.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 3,
+						"w": 227,
+						"h": 228
+					},
+					"frame": {
+						"x": 703,
+						"y": 231,
+						"w": 227,
+						"h": 228
+					}
+				},
+				{
+					"filename": "PlaneBoom_16.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 3,
+						"w": 226,
+						"h": 226
+					},
+					"frame": {
+						"x": 703,
+						"y": 461,
+						"w": 226,
+						"h": 226
+					}
+				},
+				{
+					"filename": "PlaneBoom_20.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 234,
+						"h": 234
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 4,
+						"w": 224,
+						"h": 224
+					},
+					"frame": {
+						"x": 703,
+						"y": 689,
+						"w": 224,
+						"h": 224
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:133fef1f3d896edb2d8f6d0fc2e17fdb:204b91e661fe20568486afb12d62da7f:9b22e31c6b44adbf50ace150df258c2d$"
+	}
+}
